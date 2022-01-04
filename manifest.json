@@ -10,7 +10,8 @@
   },
   "builders": {
     "node": "6.x",
-    "docs": "0.x"
+    "docs": "0.x",
+    "masterdata": "1.x"
   },
   "scripts": {
     "prereleasy": "bash lint.sh"
@@ -32,6 +33,13 @@
       "attrs": {
         "host": "api.vtex.com",
         "path": "/api/giftcards/*"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "api.vtex.com",
+        "path": "/api/*"
       }
     }
   ],

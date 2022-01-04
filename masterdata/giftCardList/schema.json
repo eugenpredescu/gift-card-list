@@ -1,0 +1,40 @@
+{
+  "properties": {
+    "listId": {
+      "type": "string"
+    },
+    "giftCardId": {
+      "type": "string"
+    },
+    "email": {
+      "type": "number"
+    },
+    "profileId": {
+      "type": "string"
+    },
+    "redemptionCode": {
+      "type": "string"
+    },
+    "quantityAlreadyInGiftCard": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "v-default-fields": [
+    "listId",
+    "giftCardId",
+    "email",
+    "profileId",
+    "redemptionCode",
+    "quantityAlreadyInGiftCard"
+  ],
+  "v-indexed": [
+    "listId",
+    "giftCardId",
+    "email",
+    "profileId",
+    "redemptionCode",
+    "quantityAlreadyInGiftCard"
+  ],
+  "v-cache": false
+}

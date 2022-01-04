@@ -14,10 +14,10 @@ export class giftCard extends JanusClient {
     })
   }
 
-  public async createGiftCard(account: string, profileIdValue:string) {
+  public async createGiftCard(profileIdValue:string) {
 
     const value = await this.http.post<{id: string, redemptionCode: string}>(
-      `https://${account}.vtexcommercestable.com.br/api/giftcards`,
+      `https://${this.context.account}.vtexcommercestable.com.br/api/giftcards`,
       {
         relationName:"loyalty-program",
         expiringDate:"9999-12-31T23:59:59.997",
@@ -32,10 +32,10 @@ export class giftCard extends JanusClient {
 
   }
 
-  public async addCreditInGiftCard(account: string, redemptionCodeValue:string, id:string, valueGiftCard: number) {
+  public async addCreditInGiftCard(redemptionCodeValue:string, id:string, valueGiftCard: number) {
 
     const value = await this.http.post<{id: string}>(
-      `https://api.vtex.com/${account}/giftcards/${id}/transactions`,
+      `https://api.vtex.com/${this.context.account}/giftcards/${id}/transactions`,
       {
         operation: "Credit",
         value: valueGiftCard,

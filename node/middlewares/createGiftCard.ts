@@ -5,7 +5,6 @@ export async function createGiftCard(ctx: Context) {
 
   const {
     clients: {profileSystem, giftCard},
-    vtex: {account}
   } = ctx
 
   const body = await json(ctx.req)
@@ -24,14 +23,14 @@ export async function createGiftCard(ctx: Context) {
     return
   }
 
-  const register = await profileSystem.getRegisterOnProfileSystem(account, body.email)
+  const register = await profileSystem.getRegisterOnProfileSystem(body.email)
 
-  const valueGiftCard: {id: string, redemptionCode: string} = await giftCard.createGiftCard(account, register)
+  const valueGiftCard: {id: string, redemptionCode: string} = await giftCard.createGiftCard(register)
 
   // CONECTAR COM A LISTA GRAPHQL
   const creditGiftCard = 222
 
-  const result = await giftCard.addCreditInGiftCard(account, valueGiftCard.redemptionCode, valueGiftCard.id, creditGiftCard)
+  const result = await giftCard.addCreditInGiftCard(valueGiftCard.redemptionCode, valueGiftCard.id, creditGiftCard)
 
   if(result) ctx.body = 'sucess'
   else ctx.body='failed'

@@ -40,7 +40,7 @@ export async function createGiftCard(ctx: Context) {
 
   const result = await giftCard.addCreditInGiftCard(valueGiftCard.redemptionCode, valueGiftCard.id, parseInt(listGraphqlValue.valuePurchased))
 
-  if(result) ctx.body = 'sucess'
+  if(result) ctx.body = {id: valueGiftCard.id, redemptionCode: valueGiftCard.redemptionCode}
   else ctx.body='failed'
 
 }

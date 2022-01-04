@@ -1,5 +1,6 @@
 import { JanusClient } from '@vtex/api'
 import type { InstanceOptions, IOContext } from '@vtex/api'
+import { randomString } from '../utils/ramdomString'
 
 export class giftCard extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
@@ -39,7 +40,8 @@ export class giftCard extends JanusClient {
       {
         operation: "Credit",
         value: valueGiftCard,
-        redemptionCode: redemptionCodeValue
+        redemptionCode: redemptionCodeValue,
+        requestId: randomString()
       }
     )
 

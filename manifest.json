@@ -5,7 +5,9 @@
   "title": "Gift Card of a Present List",
   "description": "Gift Card of a Present List",
   "categories": [],
-  "dependencies": {},
+  "dependencies": {
+    "vtex.list-graphql": "1.x"
+  },
   "builders": {
     "node": "6.x",
     "docs": "0.x"

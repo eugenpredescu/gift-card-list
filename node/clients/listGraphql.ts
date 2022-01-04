@@ -14,10 +14,10 @@ export class listGraphql extends JanusClient {
     })
   }
 
-  public async checkDataValueList(account: string, idList:string) {
+  public async checkDataValueList(idList:string) {
 
     const value = await this.http.get(
-      `https://${account}.vtexcommercestable.com.br/api/dataentities/vtex_list_graphql_userLists/search?_fields=_all&id=${idList}`,
+      `https://${this.context.account}.vtexcommercestable.com.br/api/dataentities/vtex_list_graphql_userLists/search?_fields=_all&id=${idList}`,
     )
 
     return {name: value[0].ownerName, valuePurchased: value[0].valuePurchased}

@@ -14,24 +14,24 @@ export class profileSystem extends JanusClient {
     })
   }
 
-  public async getRegisterOnProfileSystem(account: string, email:string, name:string) {
+  public async getRegisterOnProfileSystem(email:string, name:string) {
 
     const value = await this.http.get(
-      `https://${account}.vtexcommercestable.com.br/api/profile-system/pvt/profiles/${email}/PersonalData?extraFields=_all`
+      `https://${this.context.account}.vtexcommercestable.com.br/api/profile-system/pvt/profiles/${email}/PersonalData?extraFields=_all`
     )
 
     if(value.firstName != null) return value.userId
 
     else{
-      return this.createRegisterOnProfileSystem(account, email, name)
+      return this.createRegisterOnProfileSystem(email, name)
     }
 
   }
 
-private async createRegisterOnProfileSystem(account: string, email:string, name: string) {
+private async createRegisterOnProfileSystem(email:string, name: string) {
 
     const value = await this.http.post<{ profileId: string }>(
-      `https://${account}.vtexcommercestable.com.br/api/profile-system/pvt/profiles/${email}/PersonalData?extraFields=_all`,
+      `https://${this.context.account}.vtexcommercestable.com.br/api/profile-system/pvt/profiles/${email}/PersonalData?extraFields=_all`,
       {
         firstName: name,
       }

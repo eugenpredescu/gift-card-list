@@ -5,7 +5,6 @@ export async function createGiftCard(ctx: Context) {
 
   const {
     clients: {profileSystem, giftCard, listGraphql},
-    vtex: {account}
   } = ctx
 
   const body = await json(ctx.req)
@@ -31,15 +30,15 @@ export async function createGiftCard(ctx: Context) {
     return
   }
 
-  const listGraphqlValue: {name: string, valuePurchased: string} = await listGraphql.checkDataValueList(account, body.idList)
+  const listGraphqlValue: {name: string, valuePurchased: string} = await listGraphql.checkDataValueList(body.idList)
 
 
-  const register = await profileSystem.getRegisterOnProfileSystem(account, body.email, listGraphqlValue.name)
+  const register = await profileSystem.getRegisterOnProfileSystem(body.email, listGraphqlValue.name)
 
-  const valueGiftCard: {id: string, redemptionCode: string} = await giftCard.createGiftCard(account, register)
+  const valueGiftCard: {id: string, redemptionCode: string} = await giftCard.createGiftCard(register)
 
 
-  const result = await giftCard.addCreditInGiftCard(account, valueGiftCard.redemptionCode, valueGiftCard.id, parseInt(listGraphqlValue.valuePurchased))
+  const result = await giftCard.addCreditInGiftCard(valueGiftCard.redemptionCode, valueGiftCard.id, parseInt(listGraphqlValue.valuePurchased))
 
   if(result) ctx.body = 'sucess'
   else ctx.body='failed'

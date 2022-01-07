@@ -35,28 +35,42 @@ export async function createGiftCard(ctx: Context) {
     valuePurchased: string
   } = await listGraphql.checkDataValueList(body.idList)
 
-  const register = await profileSystem.getRegisterOnProfileSystem(
-    body.email,
-    listGraphqlValue.name
-  )
+  if (masterdataInfo.data[0] === undefined) {
+    const register = await profileSystem.getRegisterOnProfileSystem(
+      body.email,
+      listGraphqlValue.name
+    )
 
-  const valueGiftCard: {
-    id: string
-    redemptionCode: string
-  } = await giftCard.createGiftCard(register)
+    const valueGiftCard: {
+      id: string
+      redemptionCode: string
+    } = await giftCard.createGiftCard(register)
 
-  const result = await giftCard.addCreditInGiftCard(
-    valueGiftCard.redemptionCode,
-    valueGiftCard.id,
-    parseInt(listGraphqlValue.valuePurchased, 10)
-  )
+    result = await giftCard.addCreditInGiftCard(
+      valueGiftCard.redemptionCode,
+      valueGiftCard.id,
+      parseInt(listGraphqlValue.valuePurchased, 10) / 100
+    )
 
-  if (result) {
-    ctx.body = {
-      id: valueGiftCard.id,
+    const saveValues: SaveMasterdataValues = {
+      listId: body.idList,
+      giftCardId: valueGiftCard.id,
+      email: body.email,
+      profileId: register,
       redemptionCode: valueGiftCard.redemptionCode,
+      quantityAlreadyInGiftCard:
+        parseInt(listGraphqlValue.valuePurchased, 10) / 100,
     }
-  } else {
-    ctx.body = 'failed'
+
+    await saveInfoMasterdata(ctx, saveValues)
+
+    if (result) {
+      ctx.body = {
+        id: valueGiftCard.id,
+        redemptionCode: valueGiftCard.redemptionCode,
+      }
+    } else {
+      ctx.body = 'failed'
+    }
   }
 }

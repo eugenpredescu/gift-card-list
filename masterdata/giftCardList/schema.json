@@ -7,7 +7,7 @@
       "type": "string"
     },
     "email": {
-      "type": "number"
+      "type": "string"
     },
     "profileId": {
       "type": "string"

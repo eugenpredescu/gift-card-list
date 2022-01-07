@@ -1,3 +1,20 @@
+export async function getInfoMasterdata(
+  ctx: Context,
+  emailOwner: string,
+  idList: string
+) {
+  const {
+    clients: { giftCardList },
+  } = ctx
+
+  return giftCardList.searchRaw(
+    { page: 1, pageSize: 500 },
+    ['_all'],
+    undefined,
+    `email=${emailOwner} AND listId=${idList}`
+  )
+}
+
 export async function saveInfoMasterdata(
   ctx: Context,
   saveValues: SaveMasterdataValues

@@ -30,6 +30,9 @@ export async function createGiftCard(ctx: Context) {
     return
   }
 
+  const masterdataInfo = await getInfoMasterdata(ctx, body.email, body.idList)
+
+  let result = false
   const listGraphqlValue: {
     name: string
     valuePurchased: string

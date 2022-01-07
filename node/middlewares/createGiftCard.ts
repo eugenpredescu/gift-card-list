@@ -1,5 +1,10 @@
 import { json } from 'co-body'
 
+import {
+  getInfoMasterdata,
+  saveInfoMasterdata,
+  updateInfoMasterdata,
+} from '../utils/listMasterdata'
 import { validateEmail } from '../utils/validateEmail'
 
 export async function createGiftCard(ctx: Context) {
@@ -33,6 +38,7 @@ export async function createGiftCard(ctx: Context) {
   const masterdataInfo = await getInfoMasterdata(ctx, body.email, body.idList)
 
   let result = false
+
   const listGraphqlValue: {
     name: string
     valuePurchased: string
@@ -71,6 +77,32 @@ export async function createGiftCard(ctx: Context) {
       ctx.body = {
         id: valueGiftCard.id,
         redemptionCode: valueGiftCard.redemptionCode,
+      }
+    } else {
+      ctx.body = 'failed'
+    }
+  } else {
+    const valueBefore = masterdataInfo.data[0]
+      .quantityAlreadyInGiftCard as number
+
+    const valueInList = parseInt(listGraphqlValue.valuePurchased, 10) / 100
+
+    result = await giftCard.addCreditInGiftCard(
+      masterdataInfo.data[0].redemptionCode as string,
+      masterdataInfo.data[0].giftCardId as string,
+      (valueInList - valueBefore) as number
+    )
+
+    await updateInfoMasterdata(
+      ctx,
+      masterdataInfo.data[0].id as string,
+      parseInt(listGraphqlValue.valuePurchased, 10) / 100
+    )
+
+    if (result) {
+      ctx.body = {
+        id: masterdataInfo.data[0].giftCardId,
+        redemptionCode: masterdataInfo.data[0].redemptionCode,
       }
     } else {
       ctx.body = 'failed'

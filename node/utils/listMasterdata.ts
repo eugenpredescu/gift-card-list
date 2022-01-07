@@ -42,3 +42,28 @@ export async function saveInfoMasterdata(
       return false
     })
 }
+
+export async function updateInfoMasterdata(
+  ctx: Context,
+  id: string,
+  quantityAlreadyInGiftCard: number
+) {
+  const {
+    clients: { giftCardList },
+  } = ctx
+
+  return giftCardList
+    .update(id, {
+      quantityAlreadyInGiftCard,
+    })
+    .then(() => true)
+    .catch((e: any) => {
+      ctx.vtex.logger.error({
+        message: 'Error to update gift card lista values through MasterdataV2',
+        name: e.name,
+        exception: e.message,
+      })
+
+      return false
+    })
+}

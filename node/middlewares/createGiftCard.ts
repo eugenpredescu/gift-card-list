@@ -4,7 +4,7 @@ import { validateEmail} from '../utils/validateEmail'
 export async function createGiftCard(ctx: Context) {
 
   const {
-    clients: {profileSystem, giftCard},
+    clients: {profileSystem, giftCard, listGraphql},
   } = ctx
 
   const body = await json(ctx.req)
@@ -23,16 +23,26 @@ export async function createGiftCard(ctx: Context) {
     return
   }
 
-  const register = await profileSystem.getRegisterOnProfileSystem(body.email)
+  else if (!body.idList ) {
+    ctx.body = { message: 'missed id list' }
+    ctx.status = 400
+
+    return
+  }
+
+  const listGraphqlValue: {name: string, valuePurchased: string} = await listGraphql.checkDataValueList(body.idList)
+
+
+  const register = await profileSystem.getRegisterOnProfileSystem(body.email, listGraphqlValue.name)
+
 
   const valueGiftCard: {id: string, redemptionCode: string} = await giftCard.createGiftCard(register)
 
-  // CONECTAR COM A LISTA GRAPHQL
-  const creditGiftCard = 222
 
-  const result = await giftCard.addCreditInGiftCard(valueGiftCard.redemptionCode, valueGiftCard.id, creditGiftCard)
+  const result = await giftCard.addCreditInGiftCard(valueGiftCard.redemptionCode, valueGiftCard.id, parseInt(listGraphqlValue.valuePurchased))
 
-  if(result) ctx.body = 'sucess'
+
+  if(result) ctx.body = {id: valueGiftCard.id, redemptionCode: valueGiftCard.redemptionCode}
   else ctx.body='failed'
 
 }

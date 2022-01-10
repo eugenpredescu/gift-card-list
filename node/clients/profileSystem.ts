@@ -28,7 +28,9 @@ export class profileSystem extends JanusClient {
 
   }
 
+
 private async createRegisterOnProfileSystem(email:string, name: string) {
+
 
     const value = await this.http.post<{ profileId: string }>(
       `https://${this.context.account}.vtexcommercestable.com.br/api/profile-system/pvt/profiles/${email}/PersonalData?extraFields=_all`,

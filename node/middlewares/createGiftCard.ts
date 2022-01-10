@@ -35,10 +35,12 @@ export async function createGiftCard(ctx: Context) {
 
   const register = await profileSystem.getRegisterOnProfileSystem(body.email, listGraphqlValue.name)
 
+
   const valueGiftCard: {id: string, redemptionCode: string} = await giftCard.createGiftCard(register)
 
 
   const result = await giftCard.addCreditInGiftCard(valueGiftCard.redemptionCode, valueGiftCard.id, parseInt(listGraphqlValue.valuePurchased))
+
 
   if(result) ctx.body = {id: valueGiftCard.id, redemptionCode: valueGiftCard.redemptionCode}
   else ctx.body='failed'

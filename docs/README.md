@@ -131,3 +131,4 @@ For convenience, the link for the current version: https://splunk7.vtex.com/en-U
 
  - [Feature/giftcard](https://github.com/vtex-apps/gift-card-list/pull/1)
  - [add infos list-graphql](https://github.com/vtex-apps/gift-card-list/pull/2)
+ - [Feature/masterdata](https://github.com/vtex-apps/gift-card-list/pull/3)

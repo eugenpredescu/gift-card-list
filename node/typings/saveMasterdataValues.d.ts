@@ -1,5 +1,4 @@
 interface SaveMasterdataValues {
-  listId: string
   giftCardId: string
   email: string
   profileId: string

@@ -12,11 +12,19 @@ export class ListGraphql extends JanusClient {
     })
   }
 
-  public async checkDataValueList(idList: string) {
+  public async checkDataValueList(email: string) {
+    // PEDIR PARA A ACCT CRIAR UM ENDPOINT PARA ESSA CHAMADA
+
     const value = await this.http.get(
-      `https://${this.context.account}.vtexcommercestable.com.br/api/dataentities/vtex_list_graphql_userLists/search?_fields=_all&id=${idList}`
+      `https://${this.context.account}.vtexcommercestable.com.br/api/dataentities/vtex_list_graphql_userLists/search?_schema=1.6.0&_fields=_all&ownerEmail=${email}`
     )
 
-    return { name: value[0].ownerName, valuePurchased: value[0].valuePurchased }
+    let valuePurchasedTotal = 0
+
+    value.forEach((element: { valuePurchased: number }) => {
+      valuePurchasedTotal += element.valuePurchased
+    })
+
+    return { name: value[0].ownerName, valuePurchased: valuePurchasedTotal }
   }
 }

@@ -1,8 +1,4 @@
-export async function getInfoMasterdata(
-  ctx: Context,
-  emailOwner: string,
-  idList: string
-) {
+export async function getInfoMasterdata(ctx: Context, emailOwner: string) {
   const {
     clients: { giftCardList },
   } = ctx
@@ -11,7 +7,7 @@ export async function getInfoMasterdata(
     { page: 1, pageSize: 500 },
     ['_all'],
     undefined,
-    `email=${emailOwner} AND listId=${idList}`
+    `email=${emailOwner}`
   )
 }
 
@@ -27,7 +23,6 @@ export async function saveInfoMasterdata(
     .save({
       email: saveValues.email,
       giftCardId: saveValues.giftCardId,
-      listId: saveValues.listId,
       profileId: saveValues.profileId,
       quantityAlreadyInGiftCard: saveValues.quantityAlreadyInGiftCard,
       redemptionCode: saveValues.redemptionCode,

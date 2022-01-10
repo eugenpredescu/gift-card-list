@@ -28,21 +28,14 @@ export async function createGiftCard(ctx: Context) {
     return
   }
 
-  if (!body.idList) {
-    ctx.body = { message: 'missed id list' }
-    ctx.status = 400
-
-    return
-  }
-
-  const masterdataInfo = await getInfoMasterdata(ctx, body.email, body.idList)
+  const masterdataInfo = await getInfoMasterdata(ctx, body.email)
 
   let result = false
 
   const listGraphqlValue: {
     name: string
-    valuePurchased: string
-  } = await listGraphql.checkDataValueList(body.idList)
+    valuePurchased: number
+  } = await listGraphql.checkDataValueList(body.email)
 
   if (masterdataInfo.data[0] === undefined) {
     const register = await profileSystem.getRegisterOnProfileSystem(
@@ -58,17 +51,15 @@ export async function createGiftCard(ctx: Context) {
     result = await giftCard.addCreditInGiftCard(
       valueGiftCard.redemptionCode,
       valueGiftCard.id,
-      parseInt(listGraphqlValue.valuePurchased, 10) / 100
+      listGraphqlValue.valuePurchased / 100
     )
 
     const saveValues: SaveMasterdataValues = {
-      listId: body.idList,
       giftCardId: valueGiftCard.id,
       email: body.email,
       profileId: register,
       redemptionCode: valueGiftCard.redemptionCode,
-      quantityAlreadyInGiftCard:
-        parseInt(listGraphqlValue.valuePurchased, 10) / 100,
+      quantityAlreadyInGiftCard: listGraphqlValue.valuePurchased / 100,
     }
 
     await saveInfoMasterdata(ctx, saveValues)
@@ -85,7 +76,7 @@ export async function createGiftCard(ctx: Context) {
     const valueBefore = masterdataInfo.data[0]
       .quantityAlreadyInGiftCard as number
 
-    const valueInList = parseInt(listGraphqlValue.valuePurchased, 10) / 100
+    const valueInList = listGraphqlValue.valuePurchased / 100
 
     result = await giftCard.addCreditInGiftCard(
       masterdataInfo.data[0].redemptionCode as string,
@@ -96,7 +87,7 @@ export async function createGiftCard(ctx: Context) {
     await updateInfoMasterdata(
       ctx,
       masterdataInfo.data[0].id as string,
-      parseInt(listGraphqlValue.valuePurchased, 10) / 100
+      listGraphqlValue.valuePurchased / 100
     )
 
     if (result) {

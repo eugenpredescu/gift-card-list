@@ -15,7 +15,12 @@ export class ListGraphql extends JanusClient {
   public async checkDataValueList(email: string) {
     // PEDIR PARA A ACCT CRIAR UM ENDPOINT PARA ESSA CHAMADA
 
-    const value = await this.http.get(
+    interface ValueList {
+      ownerName: string
+      valuePurchased: number
+    }
+
+    const value = await this.http.get<ValueList[]>(
       `https://${this.context.account}.vtexcommercestable.com.br/api/dataentities/vtex_list_graphql_userLists/search?_schema=1.6.0&_fields=_all&ownerEmail=${email}`
     )
 

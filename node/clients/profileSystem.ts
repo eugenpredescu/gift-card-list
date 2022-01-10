@@ -1,37 +1,28 @@
 import { JanusClient } from '@vtex/api'
 import type { InstanceOptions, IOContext } from '@vtex/api'
 
-export class profileSystem extends JanusClient {
+export class ProfileSystem extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
     super(ctx, {
       ...options,
       headers: {
         ...options?.headers,
-        ...(ctx.authToken
-          ? { VtexIdclientAutCookie: ctx.authToken }
-          : null),
+        ...(ctx.authToken ? { VtexIdclientAutCookie: ctx.authToken } : null),
       },
     })
   }
 
-  public async getRegisterOnProfileSystem(email:string, name:string) {
-
+  public async getRegisterOnProfileSystem(email: string, name: string) {
     const value = await this.http.get(
       `https://${this.context.account}.vtexcommercestable.com.br/api/profile-system/pvt/profiles/${email}/PersonalData?extraFields=_all`
     )
 
-    if(value.firstName != null) return value.userId
+    if (value.firstName != null) return value.userId
 
-    else{
-      return this.createRegisterOnProfileSystem(email, name)
-    }
-
+    return this.createRegisterOnProfileSystem(email, name)
   }
 
-
-private async createRegisterOnProfileSystem(email:string, name: string) {
-
-
+  private async createRegisterOnProfileSystem(email: string, name: string) {
     const value = await this.http.post<{ profileId: string }>(
       `https://${this.context.account}.vtexcommercestable.com.br/api/profile-system/pvt/profiles/${email}/PersonalData?extraFields=_all`,
       {
@@ -40,7 +31,5 @@ private async createRegisterOnProfileSystem(email:string, name: string) {
     )
 
     return value.profileId
-
   }
-
 }

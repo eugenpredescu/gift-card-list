@@ -3,6 +3,7 @@ import { method, Service } from '@vtex/api'
 
 import { Clients } from './clients'
 import { createGiftCard } from './middlewares/createGiftCard'
+import { routeHistoric } from './middlewares/routeHistoric'
 
 const TIMEOUT_MS = 800
 
@@ -26,6 +27,9 @@ export default new Service({
   routes: {
     createGiftCard: method({
       POST: [createGiftCard],
+    }),
+    routeHistoric: method({
+      GET: [routeHistoric],
     }),
   },
 })

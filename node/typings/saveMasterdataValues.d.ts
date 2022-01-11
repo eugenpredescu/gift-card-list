@@ -4,10 +4,10 @@ interface SaveMasterdataValues {
   profileId: string
   redemptionCode: string
   quantityAlreadyInGiftCard: number
-  historic: Historic[]
+  history: HistoryInterface[]
 }
 
-interface Historic {
+interface HistoryInterface {
   dateAndTime: string
   value: number
   [k: string]: unknown

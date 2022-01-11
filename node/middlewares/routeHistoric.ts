@@ -23,7 +23,7 @@ export async function routeHistoric(ctx: Context) {
   const masterdataInfo = await getInfoMasterdata(ctx, body.email)
 
   if (masterdataInfo.data[0] !== undefined) {
-    ctx.body = masterdataInfo.data[0].historic
+    ctx.body = masterdataInfo.data[0].history
   } else {
     ctx.body = 'failed'
   }

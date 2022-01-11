@@ -11,6 +11,15 @@ export const updateSettings = async (
   const accountBefore = await infra.getSettings(account, workspace)
 
   if (accountBefore.settingsAccount !== settingsAccount.settingsAccount) {
+    if (accountBefore.settingsAccount !== undefined) {
+      await profileSystem.disjoinProfileSystem(account)
+
+      await profileSystem.joinProfileSystem(
+        account,
+        settingsAccount.settingsAccount
+      )
+    }
+
     const update = await infra.updateSettings(
       account,
       workspace,

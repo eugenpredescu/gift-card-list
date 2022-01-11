@@ -60,6 +60,12 @@ export async function createGiftCard(ctx: Context) {
       profileId: register,
       redemptionCode: valueGiftCard.redemptionCode,
       quantityAlreadyInGiftCard: listGraphqlValue.valuePurchased / 100,
+      historic: [
+        {
+          dateAndTime: new Date().toISOString(),
+          value: listGraphqlValue.valuePurchased / 100,
+        },
+      ],
     }
 
     await saveInfoMasterdata(ctx, saveValues)
@@ -78,17 +84,23 @@ export async function createGiftCard(ctx: Context) {
 
     const valueInList = listGraphqlValue.valuePurchased / 100
 
-    result = await giftCard.addCreditInGiftCard(
-      masterdataInfo.data[0].redemptionCode as string,
-      masterdataInfo.data[0].giftCardId as string,
-      (valueInList - valueBefore) as number
-    )
+    if (valueInList - valueBefore !== 0) {
+      result = await giftCard.addCreditInGiftCard(
+        masterdataInfo.data[0].redemptionCode as string,
+        masterdataInfo.data[0].giftCardId as string,
+        (valueInList - valueBefore) as number
+      )
 
-    await updateInfoMasterdata(
-      ctx,
-      masterdataInfo.data[0].id as string,
-      listGraphqlValue.valuePurchased / 100
-    )
+      await updateInfoMasterdata(
+        ctx,
+        masterdataInfo.data[0].id as string,
+        listGraphqlValue.valuePurchased / 100,
+        masterdataInfo.data[0].historic as Historic[],
+        (valueInList - valueBefore) as number
+      )
+    } else {
+      result = true
+    }
 
     if (result) {
       ctx.body = {

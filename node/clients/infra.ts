@@ -21,4 +21,17 @@ export class Infra extends JanusClient {
 
     return value
   }
+
+  public async updateSettings(
+    account: string,
+    workspace: string,
+    settingsAccount: { settingsAccount: string }
+  ) {
+    const value = await this.http.put(
+      `http://infra.io.vtex.com/apps/v0/${account}/${workspace}/apps/vtex.gift-card-list/settings`,
+      settingsAccount
+    )
+
+    return value
+  }
 }

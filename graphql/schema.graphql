@@ -5,3 +5,6 @@ type ReturnUpdate {
 type Query {
   getSettings: ReturnUpdate
 }
+type Mutation {
+  updateSettings(settingsAccount: String): ReturnUpdate
+}

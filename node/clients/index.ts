@@ -6,6 +6,7 @@ import { ProfileSystem } from './profileSystem'
 import { GiftCard } from './giftCard'
 import { ListGraphql } from './listGraphql'
 import { Infra } from './infra'
+import { Vlm } from './vlm'
 
 // Extend the default IOClients implementation with our own custom clients.
 export class Clients extends IOClients {
@@ -30,5 +31,9 @@ export class Clients extends IOClients {
 
   public get infra() {
     return this.getOrSet('infra', Infra)
+  }
+
+  public get vlm() {
+    return this.getOrSet('vlm', Vlm)
   }
 }

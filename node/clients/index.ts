@@ -5,6 +5,7 @@ import type { GiftCardList } from 'vtex.gift-card-list'
 import { ProfileSystem } from './profileSystem'
 import { GiftCard } from './giftCard'
 import { ListGraphql } from './listGraphql'
+import { Infra } from './infra'
 
 // Extend the default IOClients implementation with our own custom clients.
 export class Clients extends IOClients {
@@ -25,5 +26,9 @@ export class Clients extends IOClients {
       'giftCardList',
       masterDataFor<GiftCardList>('giftCardList')
     )
+  }
+
+  public get infra() {
+    return this.getOrSet('infra', Infra)
   }
 }

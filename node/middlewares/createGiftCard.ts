@@ -60,7 +60,7 @@ export async function createGiftCard(ctx: Context) {
       profileId: register,
       redemptionCode: valueGiftCard.redemptionCode,
       quantityAlreadyInGiftCard: listGraphqlValue.valuePurchased / 100,
-      historic: [
+      history: [
         {
           dateAndTime: new Date().toISOString(),
           value: listGraphqlValue.valuePurchased / 100,
@@ -75,8 +75,10 @@ export async function createGiftCard(ctx: Context) {
         id: valueGiftCard.id,
         redemptionCode: valueGiftCard.redemptionCode,
       }
+      ctx.status = 200
     } else {
       ctx.body = 'failed'
+      ctx.status = 400
     }
   } else {
     const valueBefore = masterdataInfo.data[0]
@@ -95,7 +97,7 @@ export async function createGiftCard(ctx: Context) {
         ctx,
         masterdataInfo.data[0].id as string,
         listGraphqlValue.valuePurchased / 100,
-        masterdataInfo.data[0].historic as Historic[],
+        masterdataInfo.data[0].history as HistoryInterface[],
         (valueInList - valueBefore) as number
       )
     } else {
@@ -107,8 +109,10 @@ export async function createGiftCard(ctx: Context) {
         id: masterdataInfo.data[0].giftCardId,
         redemptionCode: masterdataInfo.data[0].redemptionCode,
       }
+      ctx.status = 200
     } else {
       ctx.body = 'failed'
+      ctx.status = 400
     }
   }
 }

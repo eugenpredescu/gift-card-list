@@ -24,7 +24,9 @@ export async function routeRedemptionCode(ctx: Context) {
 
   if (masterdataInfo.data[0] !== undefined) {
     ctx.body = masterdataInfo.data[0].redemptionCode
+    ctx.status = 200
   } else {
     ctx.body = 'failed'
+    ctx.status = 400
   }
 }

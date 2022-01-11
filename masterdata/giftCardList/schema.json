@@ -16,7 +16,7 @@
       "type": "number",
       "default": 0
     },
-    "historic": {
+    "history": {
       "type": "array",
       "items": {
         "type": "object",
@@ -38,7 +38,7 @@
     "profileId",
     "redemptionCode",
     "quantityAlreadyInGiftCard",
-    "historic"
+    "history"
   ],
   "v-indexed": [
     "giftCardId",
@@ -46,7 +46,7 @@
     "profileId",
     "redemptionCode",
     "quantityAlreadyInGiftCard",
-    "hsitoric"
+    "history"
   ],
   "v-cache": false
 }

@@ -5,26 +5,18 @@ export const updateSettings = async (
 ) => {
   const {
     clients: { infra, profileSystem },
-    vtex: { account, workspace },
   } = ctx
 
-  const accountBefore = await infra.getSettings(account, workspace)
+  const accountBefore = await infra.getSettings()
 
   if (accountBefore.settingsAccount !== settingsAccount.settingsAccount) {
     if (accountBefore.settingsAccount !== undefined) {
-      await profileSystem.disjoinProfileSystem(account)
+      await profileSystem.disjoinProfileSystem()
 
-      await profileSystem.joinProfileSystem(
-        account,
-        settingsAccount.settingsAccount
-      )
+      await profileSystem.joinProfileSystem(settingsAccount.settingsAccount)
     }
 
-    const update = await infra.updateSettings(
-      account,
-      workspace,
-      settingsAccount
-    )
+    const update = await infra.updateSettings(settingsAccount)
 
     return update
   }

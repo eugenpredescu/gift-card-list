@@ -14,21 +14,17 @@ export class Infra extends JanusClient {
     })
   }
 
-  public async getSettings(account: string, workspace: string) {
+  public async getSettings() {
     const value = await this.http.get<{ settingsAccount: string }>(
-      `http://infra.io.vtex.com/apps/v0/${account}/${workspace}/apps/vtex.gift-card-list/settings`
+      `http://infra.io.vtex.com/apps/v0/${this.context.account}/${this.context.workspace}/apps/vtex.gift-card-list/settings`
     )
 
     return value
   }
 
-  public async updateSettings(
-    account: string,
-    workspace: string,
-    settingsAccount: { settingsAccount: string }
-  ) {
+  public async updateSettings(settingsAccount: { settingsAccount: string }) {
     const value = await this.http.put(
-      `http://infra.io.vtex.com/apps/v0/${account}/${workspace}/apps/vtex.gift-card-list/settings`,
+      `http://infra.io.vtex.com/apps/v0/${this.context.account}/${this.context.workspace}/apps/vtex.gift-card-list/settings`,
       settingsAccount
     )
 

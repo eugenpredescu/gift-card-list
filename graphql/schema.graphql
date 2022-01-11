@@ -1,0 +1,7 @@
+type ReturnUpdate {
+  settingsAccount: String
+}
+
+type Query {
+  getSettings: ReturnUpdate
+}

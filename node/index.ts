@@ -36,4 +36,11 @@ export default new Service({
       GET: [routeRedemptionCode],
     }),
   },
+  graphql: {
+    resolvers: {
+      Query: {
+        getSettings,
+      },
+    },
+  },
 })

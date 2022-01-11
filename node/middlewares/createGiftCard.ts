@@ -75,8 +75,10 @@ export async function createGiftCard(ctx: Context) {
         id: valueGiftCard.id,
         redemptionCode: valueGiftCard.redemptionCode,
       }
+      ctx.status = 200
     } else {
       ctx.body = 'failed'
+      ctx.status = 400
     }
   } else {
     const valueBefore = masterdataInfo.data[0]
@@ -107,8 +109,10 @@ export async function createGiftCard(ctx: Context) {
         id: masterdataInfo.data[0].giftCardId,
         redemptionCode: masterdataInfo.data[0].redemptionCode,
       }
+      ctx.status = 200
     } else {
       ctx.body = 'failed'
+      ctx.status = 400
     }
   }
 }

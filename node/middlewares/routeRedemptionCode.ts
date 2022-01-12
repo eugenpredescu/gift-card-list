@@ -7,15 +7,15 @@ export async function routeRedemptionCode(ctx: Context) {
   const body = await json(ctx.req)
 
   if (!body.email) {
-    ctx.body = { message: 'missed email' }
-    ctx.status = 400
+    ctx.body = { message: HTTP_ERROR_MESSAGES.missingEmail }
+    ctx.status = ERROR
 
     return
   }
 
   if (!validateEmail(body.email)) {
-    ctx.body = { message: 'email com formato inválido' }
-    ctx.status = 400
+    ctx.body = { message: HTTP_ERROR_MESSAGES.invalidEmail }
+    ctx.status = ERROR
 
     return
   }
@@ -24,9 +24,9 @@ export async function routeRedemptionCode(ctx: Context) {
 
   if (masterdataInfo.data[0] !== undefined) {
     ctx.body = masterdataInfo.data[0].redemptionCode
-    ctx.status = 200
+    ctx.status = SUCESS
   } else {
-    ctx.body = 'failed'
-    ctx.status = 400
+    ctx.body = HTTP_ERROR_MESSAGES.failed
+    ctx.status = ERROR
   }
 }

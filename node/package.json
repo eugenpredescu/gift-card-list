@@ -13,8 +13,7 @@
     "@vtex/test-tools": "^1.0.0",
     "@vtex/tsconfig": "^0.5.6",
     "typescript": "3.9.7",
-    "vtex.gift-card-list": "https://ana--pedrocruz.myvtex.com/_v/private/typings/linked/v1/vtex.gift-card-list@0.3.0+build1641919925/public/@types/vtex.gift-card-list",
-    "vtex.list-graphql": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.list-graphql@1.6.0/public/@types/vtex.list-graphql"
+    "vtex.styleguide": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.145.2/public/@types/vtex.styleguide"
   },
   "scripts": {
     "lint": "tsc --noEmit --pretty"

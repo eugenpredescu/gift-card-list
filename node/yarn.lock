@@ -5816,13 +5816,9 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-"vtex.gift-card-list@https://ana--pedrocruz.myvtex.com/_v/private/typings/linked/v1/vtex.gift-card-list@0.3.0+build1641919925/public/@types/vtex.gift-card-list":
-  version "0.3.0"
-  resolved "https://ana--pedrocruz.myvtex.com/_v/private/typings/linked/v1/vtex.gift-card-list@0.3.0+build1641919925/public/@types/vtex.gift-card-list#f6ed23cbe5e0a3287e3f658264730a692fe2ecad"
-
-"vtex.list-graphql@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.list-graphql@1.6.0/public/@types/vtex.list-graphql":
-  version "1.6.0"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.list-graphql@1.6.0/public/@types/vtex.list-graphql#2ebdeeeb32e260abcab9eef8d84aa66a0d7aef91"
+"vtex.styleguide@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.145.2/public/@types/vtex.styleguide":
+  version "9.145.2"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.145.2/public/@types/vtex.styleguide#ca64bf8408ad3eb487b0822dd68f77565c986a56"
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"

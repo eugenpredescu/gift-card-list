@@ -15,6 +15,21 @@
     "quantityAlreadyInGiftCard": {
       "type": "number",
       "default": 0
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dateAndTime": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": ["dateAndTime", "value"]
+      }
     }
   },
   "v-default-fields": [
@@ -22,14 +37,16 @@
     "email",
     "profileId",
     "redemptionCode",
-    "quantityAlreadyInGiftCard"
+    "quantityAlreadyInGiftCard",
+    "history"
   ],
   "v-indexed": [
     "giftCardId",
     "email",
     "profileId",
     "redemptionCode",
-    "quantityAlreadyInGiftCard"
+    "quantityAlreadyInGiftCard",
+    "history"
   ],
   "v-cache": false
 }

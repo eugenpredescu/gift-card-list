@@ -9,6 +9,10 @@
     "createGiftCard": {
       "path": "/_v/createGiftCard",
       "public": false
+    },
+    "routeHistoric": {
+      "path": "/_v/routeHistoric",
+      "public": false
     }
   }
 }

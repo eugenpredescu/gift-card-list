@@ -26,6 +26,7 @@ export async function saveInfoMasterdata(
       profileId: saveValues.profileId,
       quantityAlreadyInGiftCard: saveValues.quantityAlreadyInGiftCard,
       redemptionCode: saveValues.redemptionCode,
+      history: saveValues.history,
     })
     .catch((e: any) => {
       ctx.vtex.logger.error({
@@ -41,15 +42,23 @@ export async function saveInfoMasterdata(
 export async function updateInfoMasterdata(
   ctx: Context,
   id: string,
-  quantityAlreadyInGiftCard: number
+  quantityAlreadyInGiftCard: number,
+  history: HistoryInterface[],
+  valueHistory: number
 ) {
   const {
     clients: { giftCardList },
   } = ctx
 
+  history.push({
+    dateAndTime: new Date().toISOString(),
+    value: valueHistory,
+  })
+
   return giftCardList
     .update(id, {
       quantityAlreadyInGiftCard,
+      history,
     })
     .then(() => true)
     .catch((e: any) => {

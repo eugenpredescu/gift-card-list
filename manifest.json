@@ -1,7 +1,7 @@
 {
   "name": "gift-card-list",
   "vendor": "vtex",
-  "version": "0.4.0",
+  "version": "0.6.0",
   "title": "Gift Card of a Present List",
   "description": "Gift Card of a Present List",
   "categories": [],
@@ -26,6 +26,13 @@
     {
       "name": "outbound-access",
       "attrs": {
+        "host": "portal.vtexcommercestable.com.br",
+        "path": "/api/*"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
         "host": "{{account}}.vtexcommercestable.com.br",
         "path": "/api/*"
       }
@@ -46,6 +53,9 @@
         "host": "api.vtex.com",
         "path": "/api/*"
       }
+    },
+    {
+      "name": "update-app-settings"
     }
   ],
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"

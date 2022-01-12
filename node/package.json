@@ -13,10 +13,12 @@
     "@vtex/test-tools": "^1.0.0",
     "@vtex/tsconfig": "^0.5.6",
     "typescript": "3.9.7",
-    "vtex.styleguide": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.145.2/public/@types/vtex.styleguide"
+    "vtex.styleguide": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.145.2/public/@types/vtex.styleguide",
+    "vtex.gift-card-list": "https://list--anamb.myvtex.com/_v/private/typings/linked/v1/vtex.gift-card-list@0.4.0+build1642018107/public/@types/vtex.gift-card-list",
+    "vtex.list-graphql": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.list-graphql@1.6.0/public/@types/vtex.list-graphql"
   },
   "scripts": {
     "lint": "tsc --noEmit --pretty"
   },
-  "version": "0.4.0"
+  "version": "0.6.0"
 }

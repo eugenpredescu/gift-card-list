@@ -5819,6 +5819,13 @@ verror@1.10.0:
 "vtex.styleguide@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.145.2/public/@types/vtex.styleguide":
   version "9.145.2"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.145.2/public/@types/vtex.styleguide#ca64bf8408ad3eb487b0822dd68f77565c986a56"
+"vtex.gift-card-list@https://list--anamb.myvtex.com/_v/private/typings/linked/v1/vtex.gift-card-list@0.4.0+build1642018107/public/@types/vtex.gift-card-list":
+  version "0.4.0"
+  resolved "https://list--anamb.myvtex.com/_v/private/typings/linked/v1/vtex.gift-card-list@0.4.0+build1642018107/public/@types/vtex.gift-card-list#004b3fa1e84ea18f1561dcfe0be2ac7d525a6d52"
+
+"vtex.list-graphql@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.list-graphql@1.6.0/public/@types/vtex.list-graphql":
+  version "1.6.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.list-graphql@1.6.0/public/@types/vtex.list-graphql#2ebdeeeb32e260abcab9eef8d84aa66a0d7aef91"
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"

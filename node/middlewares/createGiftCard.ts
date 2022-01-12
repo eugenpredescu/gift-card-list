@@ -15,15 +15,15 @@ export async function createGiftCard(ctx: Context) {
   const body = await json(ctx.req)
 
   if (!body.email) {
-    ctx.body = { message: 'missed email' }
-    ctx.status = 400
+    ctx.body = { message: HTTP_ERROR_MESSAGES.missingEmail }
+    ctx.status = ERROR
 
     return
   }
 
   if (!validateEmail(body.email)) {
-    ctx.body = { message: 'email com formato inválido' }
-    ctx.status = 400
+    ctx.body = { message: HTTP_ERROR_MESSAGES.invalidEmail }
+    ctx.status = ERROR
 
     return
   }
@@ -75,10 +75,10 @@ export async function createGiftCard(ctx: Context) {
         id: valueGiftCard.id,
         redemptionCode: valueGiftCard.redemptionCode,
       }
-      ctx.status = 200
+      ctx.status = SUCESS
     } else {
-      ctx.body = 'failed'
-      ctx.status = 400
+      ctx.body = HTTP_ERROR_MESSAGES.failed
+      ctx.status = ERROR
     }
   } else {
     const valueBefore = masterdataInfo.data[0]
@@ -109,10 +109,10 @@ export async function createGiftCard(ctx: Context) {
         id: masterdataInfo.data[0].giftCardId,
         redemptionCode: masterdataInfo.data[0].redemptionCode,
       }
-      ctx.status = 200
+      ctx.status = SUCESS
     } else {
-      ctx.body = 'failed'
-      ctx.status = 400
+      ctx.body = HTTP_ERROR_MESSAGES.failed
+      ctx.status = ERROR
     }
   }
 }

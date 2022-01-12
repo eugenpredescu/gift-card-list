@@ -15,9 +15,7 @@ export class Vlm extends JanusClient {
   }
 
   public async getAccounts() {
-    const value = await this.http.get(
-      `https://${this.context.account}.vtexcommercestable.com.br/api/vlm/account`
-    )
+    const value = await this.http.get(`/api/vlm/account`)
 
     const accounts: string[] = []
 

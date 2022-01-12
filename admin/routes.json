@@ -1,0 +1,6 @@
+{
+  "admin.app.giftcard": {
+    "component": "GiftCardAdmin",
+    "path": "/admin/app/giftcard/configuration"
+  }
+}

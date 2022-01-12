@@ -35,13 +35,11 @@ export class ProfileSystem extends JanusClient {
 
   public async joinProfileSystem(mainAccount: string) {
     await this.http.put(
-      `http://${this.context.account}.vtexcommercestable.com.br/api/profile-system/pvt/profilerepository?accountNameTo=${mainAccount}`
+      `/api/profile-system/pvt/profilerepository?accountNameTo=${mainAccount}`
     )
   }
 
   public async disjoinProfileSystem() {
-    await this.http.delete(
-      `http://${this.context.account}.vtexcommercestable.com.br/api/profile-system/pvt/profilerepository`
-    )
+    await this.http.delete(`/api/profile-system/pvt/profilerepository`)
   }
 }

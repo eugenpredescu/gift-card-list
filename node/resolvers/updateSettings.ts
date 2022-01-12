@@ -1,13 +1,17 @@
+import { Apps } from '@vtex/api'
+
 export const updateSettings = async (
   _: any,
   settingsAccount: { settingsAccount: string },
   ctx: Context
 ) => {
   const {
-    clients: { infra, profileSystem },
+    clients: { profileSystem },
   } = ctx
 
-  const accountBefore = await infra.getSettings()
+  const apps = new Apps(ctx.vtex)
+
+  const accountBefore = await apps.getAppSettings(ctx.vtex.userAgent)
 
   if (accountBefore.settingsAccount !== settingsAccount.settingsAccount) {
     if (accountBefore.settingsAccount !== undefined) {
@@ -16,7 +20,10 @@ export const updateSettings = async (
       await profileSystem.joinProfileSystem(settingsAccount.settingsAccount)
     }
 
-    const update = await infra.updateSettings(settingsAccount)
+    const update = await apps.saveAppSettings(
+      ctx.vtex.userAgent,
+      settingsAccount
+    )
 
     return update
   }

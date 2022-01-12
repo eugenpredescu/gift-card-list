@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import type { FC, SyntheticEvent } from 'react'
 import React, { useContext } from 'react'
 import { useIntl } from 'react-intl'

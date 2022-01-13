@@ -32,4 +32,14 @@ export class ProfileSystem extends JanusClient {
 
     return value.profileId
   }
+
+  public async joinProfileSystem(mainAccount: string) {
+    await this.http.put(
+      `/api/profile-system/pvt/profilerepository?accountNameTo=${mainAccount}`
+    )
+  }
+
+  public async disjoinProfileSystem() {
+    await this.http.delete(`/api/profile-system/pvt/profilerepository`)
+  }
 }

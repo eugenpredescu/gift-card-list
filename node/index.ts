@@ -5,6 +5,9 @@ import { Clients } from './clients'
 import { createGiftCard } from './middlewares/createGiftCard'
 import { routeHistoric } from './middlewares/routeHistoric'
 import { routeRedemptionCode } from './middlewares/routeRedemptionCode'
+import { updateSettings } from './resolvers/updateSettings'
+import { getSettings } from './resolvers/getSettings'
+import { getAccounts } from './resolvers/getAccounts'
 
 const TIMEOUT_MS = 800
 
@@ -35,5 +38,16 @@ export default new Service({
     routeRedemptionCode: method({
       GET: [routeRedemptionCode],
     }),
+  },
+  graphql: {
+    resolvers: {
+      Query: {
+        getSettings,
+        getAccounts,
+      },
+      Mutation: {
+        updateSettings,
+      },
+    },
   },
 })

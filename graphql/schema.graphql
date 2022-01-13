@@ -1,0 +1,11 @@
+type ReturnUpdate {
+  settingsAccount: String
+}
+
+type Query {
+  getSettings: ReturnUpdate
+  getAccounts: [String]
+}
+type Mutation {
+  updateSettings(settingsAccount: String): ReturnUpdate
+}

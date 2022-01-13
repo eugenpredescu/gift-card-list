@@ -13,7 +13,7 @@ interface ContextType {
   handleCloseAlert: () => void
   setModalSave: (modalSave: boolean) => void
 }
-const Context = React.createContext<ContextType>({
+const AccountContext = React.createContext<ContextType>({
   account: '',
   options: [{ label: '', value: '' }],
   setAccount: () => {},
@@ -25,4 +25,4 @@ const Context = React.createContext<ContextType>({
   setModalSave: () => {},
 })
 
-export default Context
+export default AccountContext

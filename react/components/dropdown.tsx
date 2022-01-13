@@ -3,11 +3,11 @@ import React, { useContext } from 'react'
 import { useIntl } from 'react-intl'
 import { Tooltip, Dropdown, IconInfo } from 'vtex.styleguide'
 
-import Context from '../Context/context'
+import AccountContext from '../Context/accountContext'
 import { dropdown } from '../utils/definedMessages'
 
 const DropdownArea: FC = () => {
-  const provider = useContext(Context)
+  const provider = useContext(AccountContext)
   const intl = useIntl()
 
   const updateValue = (event: React.ChangeEvent<HTMLInputElement>) => {

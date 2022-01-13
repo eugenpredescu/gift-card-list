@@ -5,10 +5,10 @@ import AlertArea from './alert'
 import ButtonSaveArea from './buttonSave'
 import DropdownArea from './dropdown'
 import ModalSave from './modalSave'
-import Context from '../Context/context'
+import AccountContext from '../Context/accountContext'
 
 const ConfigurationComponent: FC = () => {
-  const provider = useContext(Context)
+  const provider = useContext(AccountContext)
 
   if (provider.modalSave) return <ModalSave />
 

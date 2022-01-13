@@ -1,15 +1,14 @@
-/* eslint-disable vtex/prefer-early-return */
 import type { FC } from 'react'
 import React, { useMemo, useEffect, useState } from 'react'
 import { useMutation, useQuery } from 'react-apollo'
 
-import Context from '../Context/context'
+import AccountContext from '../Context/accountContext'
 import getAccounts from '../queries/getAccount.gql'
 import getSettings from '../queries/getSettings.gql'
 import updateSettings from '../queries/updateSettings.gql'
 import { ShowAlertOptions } from '../utils/showAlertOptions'
 
-const Provider: FC = (props) => {
+const AccountProvider: FC = (props) => {
   const [account, setAccount] = useState('')
   const [showAlert, setShowAlert] = useState(ShowAlertOptions.notShow)
   const [modalSave, setModalSave] = useState(false)
@@ -65,7 +64,7 @@ const Provider: FC = (props) => {
   }
 
   return (
-    <Context.Provider
+    <AccountContext.Provider
       value={{
         account,
         options,
@@ -79,8 +78,8 @@ const Provider: FC = (props) => {
       }}
     >
       {props.children}
-    </Context.Provider>
+    </AccountContext.Provider>
   )
 }
 
-export default Provider
+export default AccountProvider

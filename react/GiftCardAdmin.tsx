@@ -3,7 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { Layout, PageBlock, ToastProvider } from 'vtex.styleguide'
 
-import Provider from './Provider/provider'
+import AccountProvider from './Provider/accountProvider'
 import { pageblock } from './utils/definedMessages'
 import ConfigurationComponent from './components/configurationComponent'
 
@@ -12,7 +12,7 @@ const GiftCardAdmin: FC = () => {
 
   return (
     <ToastProvider positioning="window">
-      <Provider>
+      <AccountProvider>
         <Layout>
           <PageBlock
             title={intl.formatMessage(pageblock.title)}
@@ -21,7 +21,7 @@ const GiftCardAdmin: FC = () => {
             <ConfigurationComponent />
           </PageBlock>
         </Layout>
-      </Provider>
+      </AccountProvider>
     </ToastProvider>
   )
 }

@@ -3,11 +3,11 @@ import React, { useContext } from 'react'
 import { useIntl } from 'react-intl'
 import { Button, Modal } from 'vtex.styleguide'
 
-import Context from '../Context/context'
+import AccountContext from '../Context/accountContext'
 import { modalSave } from '../utils/definedMessages'
 
 const ModalSave: FC = () => {
-  const provider = useContext(Context)
+  const provider = useContext(AccountContext)
 
   const intl = useIntl()
 

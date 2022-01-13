@@ -134,3 +134,4 @@ For convenience, the link for the current version: https://splunk7.vtex.com/en-U
  - [Feature/masterdata](https://github.com/vtex-apps/gift-card-list/pull/3)
  - [Feature/new masterdata](https://github.com/vtex-apps/gift-card-list/pull/4)
  - [rota para resgatar o RedemptionCode](https://github.com/vtex-apps/gift-card-list/pull/6)
+ - [Feature/admin](https://github.com/vtex-apps/gift-card-list/pull/8)

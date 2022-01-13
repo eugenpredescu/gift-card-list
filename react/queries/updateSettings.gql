@@ -1,0 +1,5 @@
+mutation updateSettings($settings: String) {
+  updateSettings(settingsAccount: $settings) {
+    settingsAccount
+  }
+}

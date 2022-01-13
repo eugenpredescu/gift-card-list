@@ -1,5 +1,5 @@
 {
-  "name": "service-example",
+  "name": "gift-card-list",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -31,12 +31,15 @@
   "devDependencies": {
     "@types/node": "^12.12.21",
     "@vtex/danger": "^0.2.7",
+    "@vtex/intl-equalizer": "^2.5.1",
     "@vtex/prettier-config": "^0.3.6",
     "eslint": "^7.16.0",
     "eslint-config-vtex": "^12.9.3",
+    "eslint-config-vtex-react": "^6.3.2",
     "husky": "^4.3.6",
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
+    "react-intl": "^5.20.7",
     "typescript": "^3.7.5"
   },
   "dependencies": {

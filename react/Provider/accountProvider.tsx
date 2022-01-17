@@ -48,7 +48,7 @@ const AccountProvider: FC = (props) => {
       variables: { settings: account },
     })
 
-    if (valueReturn) {
+    if (valueReturn?.data?.updateSettings) {
       setShowAlert(ShowAlertOptions.alertSave)
 
       return true

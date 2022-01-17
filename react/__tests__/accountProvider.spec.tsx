@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from '@vtex/test-tools/react'
+import { fireEvent, render } from '@vtex/test-tools/react'
 import React from 'react'
 import { MockedProvider, wait } from '@apollo/react-testing'
 

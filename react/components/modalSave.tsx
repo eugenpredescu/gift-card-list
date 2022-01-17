@@ -36,7 +36,7 @@ const ModalSave: FC = () => {
           </span>
           <span>
             <Button
-              testId="button-modal-ok"
+              testId="button-modal-save"
               variation="primary"
               onClick={(e: SyntheticEvent) => {
                 e.preventDefault()

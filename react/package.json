@@ -7,7 +7,6 @@
     "ramda": "^0.25.0",
     "react": "^17.0.2",
     "react-apollo": "^3.1.5",
-    "react-dom": "^17.0.2",
     "react-intl": "^5.24.3",
     "vtex": "^3.0.0"
   },

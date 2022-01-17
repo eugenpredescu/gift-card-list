@@ -28,7 +28,9 @@ const DropdownArea: FC = () => {
       </p>
       <div className="mb5">
         <Dropdown
+          selectTestId="select"
           size="large"
+          testId="dropdown"
           options={provider.options}
           value={provider.account}
           onChange={updateValue}

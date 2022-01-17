@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@vtex/test-tools/react'
 import React from 'react'
 
-import ModalSave from '../Components/modalSave'
+import ModalSave from '../components/modalSave'
 import AccountContext from '../Context/accountContext'
 // eslint-disable-next-line jest/no-mocks-import
 import { values } from '../__mocks__/values'

@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@vtex/test-tools/react'
 import React from 'react'
 
-import ButtonSaveArea from '../Components/buttonSave'
+import ButtonSaveArea from '../components/buttonSave'
 import AccountContext from '../context/accountContext'
 // eslint-disable-next-line jest/no-mocks-import
 import { values } from '../__mocks__/values'

@@ -1,7 +1,7 @@
 import { render } from '@vtex/test-tools/react'
 import React from 'react'
 
-import AlertArea from '../Components/alert'
+import AlertArea from '../components/alert'
 import AccountContext from '../context/accountContext'
 import { ShowAlertOptions } from '../utils/showAlertOptions'
 // eslint-disable-next-line jest/no-mocks-import

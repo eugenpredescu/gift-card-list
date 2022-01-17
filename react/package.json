@@ -6,7 +6,8 @@
     "co-body": "^6.0.0",
     "ramda": "^0.25.0",
     "react": "^17.0.2",
-    "react-apollo": "^3.1.5"
+    "react-apollo": "^3.1.5",
+    "vtex": "^3.0.0"
   },
   "devDependencies": {
     "@apollo/react-testing": "3",
@@ -18,10 +19,11 @@
     "@types/ramda": "types/npm-ramda#dist",
     "@types/react": "^17.0.38",
     "@vtex/api": "6.45.6",
-    "@vtex/test-tools": "^3.4.3",
+    "@vtex/test-tools": "^3.4.2",
     "@vtex/tsconfig": "^0.5.6",
     "babel-jest": "^27.4.6",
-    "jest": "^27.4.7",
+    "jest": "^27.0.3",
+    "jest-css-modules": "^2.1.0",
     "ts-jest": "^27.0.3",
     "typescript": "3.9.7",
     "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.3/public/@types/vtex.render-runtime",
@@ -34,10 +36,15 @@
     ],
     "transform": {
       "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
     }
   },
   "scripts": {
-    "lint": "tsc --noEmit --pretty"
+    "lint": "tsc --noEmit --pretty",
+    "test": "vtex-test-tools test"
   },
   "version": "0.7.0"
 }

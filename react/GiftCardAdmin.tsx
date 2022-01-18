@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { Layout, PageBlock, ToastProvider } from 'vtex.styleguide'
+import { Layout, PageBlock } from 'vtex.styleguide'
 
 import AccountProvider from './Provider/accountProvider'
 import { pageblock } from './utils/definedMessages'
@@ -11,18 +11,13 @@ const GiftCardAdmin: FC = () => {
   const intl = useIntl()
 
   return (
-    <ToastProvider positioning="window">
-      <AccountProvider>
-        <Layout>
-          <PageBlock
-            title={intl.formatMessage(pageblock.title)}
-            variation="full"
-          >
-            <ConfigurationComponent />
-          </PageBlock>
-        </Layout>
-      </AccountProvider>
-    </ToastProvider>
+    <AccountProvider>
+      <Layout>
+        <PageBlock title={intl.formatMessage(pageblock.title)} variation="full">
+          <ConfigurationComponent />
+        </PageBlock>
+      </Layout>
+    </AccountProvider>
   )
 }
 

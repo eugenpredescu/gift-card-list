@@ -2,7 +2,7 @@ import React from 'react'
 
 import type { ShowAlertOptions } from '../utils/showAlertOptions'
 
-interface ContextType {
+interface AccountContextType {
   account: string
   options: Options[]
   setAccount: (account: string) => void
@@ -13,7 +13,7 @@ interface ContextType {
   handleCloseAlert: () => void
   setModalSave: (modalSave: boolean) => void
 }
-const AccountContext = React.createContext<ContextType>({
+const AccountContext = React.createContext<AccountContextType>({
   account: '',
   options: [{ label: '', value: '' }],
   setAccount: () => {},

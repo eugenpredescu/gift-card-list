@@ -1,9 +1,10 @@
 import { json } from 'co-body'
 
+import { ERROR, HTTP_ERROR_MESSAGES, SUCESS } from '../utils/constants'
 import { getInfoMasterdata } from '../utils/listMasterdata'
 import { validateEmail } from '../utils/validateEmail'
 
-export async function routeHistoric(ctx: Context) {
+export async function routeHistory(ctx: Context) {
   const body = await json(ctx.req)
 
   if (!body.email) {

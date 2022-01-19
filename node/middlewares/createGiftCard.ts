@@ -121,16 +121,16 @@ export async function createGiftCard(ctx: Context) {
       masterdataInfo.data[0].history as HistoryInterface[],
       body.value as number
     )
-  }
 
-  if (result) {
-    ctx.body = {
-      id: masterdataInfo.data[0].giftCardId,
-      redemptionCode: masterdataInfo.data[0].redemptionCode,
+    if (result) {
+      ctx.body = {
+        id: masterdataInfo.data[0].giftCardId,
+        redemptionCode: masterdataInfo.data[0].redemptionCode,
+      }
+      ctx.status = SUCESS
+    } else {
+      ctx.body = HTTP_ERROR_MESSAGES.failed
+      ctx.status = ERROR
     }
-    ctx.status = SUCESS
-  } else {
-    ctx.body = HTTP_ERROR_MESSAGES.failed
-    ctx.status = ERROR
   }
 }

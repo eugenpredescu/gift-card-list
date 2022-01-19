@@ -10368,7 +10368,7 @@ static-extend@^0.1.1, static-extend@^0.1.2:
     define-property "^0.2.5"
     object-copy "^0.1.0"
 
-"stats-lite@github:vtex/node-stats-lite#dist":
+stats-lite@vtex/node-stats-lite#dist:
   version "2.2.0"
   resolved "https://codeload.github.com/vtex/node-stats-lite/tar.gz/1b0d39cc41ef7aaecfd541191f877887a2044797"
   dependencies:
@@ -11281,6 +11281,14 @@ vtex-tachyons@^3.2.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/vtex-tachyons/-/vtex-tachyons-3.2.2.tgz#e9e39d939778ef7d80a92c476cecf7417f79a6e8"
   integrity sha512-4M53uuvV+2XEjplVYiPgpBuaI5dtGksVgz/20NNjbZkXklJM7Lwgod/hOoh3PtIn36+95zZVVgXYfs3e6EU8YA==
+
+"vtex.gift-card-list@https://ana--pedrocruz.myvtex.com/_v/private/typings/linked/v1/vtex.gift-card-list@0.7.0+build1642594978/public/@types/vtex.gift-card-list":
+  version "0.7.0"
+  resolved "https://ana--pedrocruz.myvtex.com/_v/private/typings/linked/v1/vtex.gift-card-list@0.7.0+build1642594978/public/@types/vtex.gift-card-list#4c7bd7e1b23e1cfedcc5ca372d410631b1cf182c"
+
+"vtex.list-graphql@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.list-graphql@1.10.0/public/@types/vtex.list-graphql":
+  version "1.10.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.list-graphql@1.10.0/public/@types/vtex.list-graphql#4c91716e86e95e5a3866518591a20c96292973d7"
 
 "vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.3/public/@types/vtex.render-runtime":
   version "8.132.3"

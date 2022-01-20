@@ -37,9 +37,8 @@ describe('List Graphql Client', () => {
       firstName: null,
     })
 
-    // @ts-ignore
-    // eslint-disable-next-line prettier/prettier
     const post = jest
+      // @ts-ignore
       .spyOn(ProfileSystemClient.http, 'post')
       .mockResolvedValue({
         profileId: 'id',
@@ -64,9 +63,8 @@ describe('List Graphql Client', () => {
   })
 
   it('Test if joinProfileSystem it works', async () => {
-    // @ts-ignore
-    // eslint-disable-next-line prettier/prettier
     const put = jest
+      // @ts-ignore
       .spyOn(ProfileSystemClient.http, 'put')
       .mockResolvedValue('')
 
@@ -78,10 +76,10 @@ describe('List Graphql Client', () => {
   })
 
   it('Test if disjoinProfileSystem it works', async () => {
-    // @ts-ignore
-    // eslint-disable-next-line prettier/prettier
     const deleteFunction = jest
+      // @ts-ignore
       .spyOn(ProfileSystemClient.http, 'delete')
+      // @ts-ignore
       .mockResolvedValue('')
 
     await ProfileSystemClient.disjoinProfileSystem()

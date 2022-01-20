@@ -1,7 +1,7 @@
 import co_body from 'co-body'
 
 import { routeHistory } from '../../middlewares/routeHistory'
-import { ERROR, HTTP_ERROR_MESSAGES, SUCESS } from '../../utils/constants'
+import { ERROR, HTTP_ERROR_MESSAGES, SUCCESS } from '../../utils/constants'
 // eslint-disable-next-line jest/no-mocks-import
 import { ctx, ctxRouteError, ctxRouteSuccess } from '../../__mocks__/contexts'
 
@@ -14,7 +14,9 @@ describe('Test routeHistory', () => {
 
     await routeHistory(ctx)
 
-    expect(ctx.body.message).toBe(HTTP_ERROR_MESSAGES.missingEmail)
+    const context = ctx.body as { message: string }
+
+    expect(context.message).toBe(HTTP_ERROR_MESSAGES.missingEmail)
     expect(ctx.status).toBe(ERROR)
   })
 
@@ -28,7 +30,9 @@ describe('Test routeHistory', () => {
 
     await routeHistory(ctx)
 
-    expect(ctx.body.message).toBe(HTTP_ERROR_MESSAGES.invalidEmail)
+    const context = ctx.body as { message: string }
+
+    expect(context.message).toBe(HTTP_ERROR_MESSAGES.invalidEmail)
     expect(ctx.status).toBe(ERROR)
   })
 
@@ -48,7 +52,7 @@ describe('Test routeHistory', () => {
         value: 2,
       },
     ])
-    expect(ctxRouteSuccess.status).toBe(SUCESS)
+    expect(ctxRouteSuccess.status).toBe(SUCCESS)
   })
 
   it('testing if the return is an error if dont have a history', async () => {

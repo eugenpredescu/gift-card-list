@@ -1,6 +1,6 @@
 import co_body from 'co-body'
 
-import { ERROR, HTTP_ERROR_MESSAGES, SUCESS } from '../../utils/constants'
+import { ERROR, HTTP_ERROR_MESSAGES, SUCCESS } from '../../utils/constants'
 import { createGiftCard } from '../../middlewares/createGiftCard'
 // eslint-disable-next-line jest/no-mocks-import
 import {
@@ -22,7 +22,9 @@ describe('Test createGiftCrad', () => {
 
     await createGiftCard(ctx)
 
-    expect(ctx.body.message).toBe(HTTP_ERROR_MESSAGES.missingEmail)
+    const context = ctx.body as { message: string }
+
+    expect(context.message).toBe(HTTP_ERROR_MESSAGES.missingEmail)
     expect(ctx.status).toBe(ERROR)
   })
 
@@ -37,7 +39,9 @@ describe('Test createGiftCrad', () => {
 
     await createGiftCard(ctx)
 
-    expect(ctx.body.message).toBe(HTTP_ERROR_MESSAGES.invalidEmail)
+    const context = ctx.body as { message: string }
+
+    expect(context.message).toBe(HTTP_ERROR_MESSAGES.invalidEmail)
     expect(ctx.status).toBe(ERROR)
   })
 
@@ -51,7 +55,9 @@ describe('Test createGiftCrad', () => {
 
     await createGiftCard(ctx)
 
-    expect(ctx.body.message).toBe(HTTP_ERROR_MESSAGES.missingValue)
+    const context = ctx.body as { message: string }
+
+    expect(context.message).toBe(HTTP_ERROR_MESSAGES.missingValue)
     expect(ctx.status).toBe(ERROR)
   })
 
@@ -66,7 +72,9 @@ describe('Test createGiftCrad', () => {
 
     await createGiftCard(ctx)
 
-    expect(ctx.body.message).toBe(HTTP_ERROR_MESSAGES.negativeValue)
+    const context = ctx.body as { message: string }
+
+    expect(context.message).toBe(HTTP_ERROR_MESSAGES.negativeValue)
     expect(ctx.status).toBe(ERROR)
   })
 
@@ -81,7 +89,9 @@ describe('Test createGiftCrad', () => {
 
     await createGiftCard(ctx)
 
-    expect(ctx.body.message).toBe(
+    const context = ctx.body as { message: string }
+
+    expect(context.message).toBe(
       `${HTTP_ERROR_MESSAGES.valueBiggerThanCouldBe}2`
     )
     expect(ctx.status).toBe(ERROR)
@@ -102,7 +112,7 @@ describe('Test createGiftCrad', () => {
       id: 'id',
       redemptionCode: 'redemptionCode',
     })
-    expect(ctxMasterdataUndefinedTrue.status).toBe(SUCESS)
+    expect(ctxMasterdataUndefinedTrue.status).toBe(SUCCESS)
   })
 
   it('testing if the return error when the function addCreditInGiftCard return false and dont have a giftcard before', async () => {
@@ -137,7 +147,7 @@ describe('Test createGiftCrad', () => {
       id: 'giftCardId',
       redemptionCode: 'redemptionCode',
     })
-    expect(ctxMasterdataValueTrue.status).toBe(SUCESS)
+    expect(ctxMasterdataValueTrue.status).toBe(SUCCESS)
   })
 
   it('testing if the return error when the function addCreditInGiftCard return false and have a giftcard before', async () => {

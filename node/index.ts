@@ -3,7 +3,7 @@ import { method, Service } from '@vtex/api'
 
 import { Clients } from './clients'
 import { createGiftCard } from './middlewares/createGiftCard'
-import { routeHistoric } from './middlewares/routeHistoric'
+import { routeHistory } from './middlewares/routeHistory'
 import { routeRedemptionCode } from './middlewares/routeRedemptionCode'
 import { updateSettings } from './resolvers/updateSettings'
 import { getSettings } from './resolvers/getSettings'
@@ -32,8 +32,8 @@ export default new Service({
     createGiftCard: method({
       POST: [createGiftCard],
     }),
-    routeHistoric: method({
-      GET: [routeHistoric],
+    routeHistory: method({
+      GET: [routeHistory],
     }),
     routeRedemptionCode: method({
       GET: [routeRedemptionCode],

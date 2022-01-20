@@ -1,5 +1,6 @@
 import { json } from 'co-body'
 
+import { ERROR, HTTP_ERROR_MESSAGES, SUCCESS } from '../utils/constants'
 import {
   getInfoMasterdata,
   saveInfoMasterdata,
@@ -28,14 +29,39 @@ export async function createGiftCard(ctx: Context) {
     return
   }
 
-  const masterdataInfo = await getInfoMasterdata(ctx, body.email)
+  if (!body.value) {
+    ctx.body = { message: HTTP_ERROR_MESSAGES.missingValue }
+    ctx.status = ERROR
 
-  let result = false
+    return
+  }
+
+  if (body.value <= 0) {
+    ctx.body = { message: HTTP_ERROR_MESSAGES.negativeValue }
+    ctx.status = ERROR
+
+    return
+  }
 
   const listGraphqlValue: {
     name: string
     valuePurchased: number
   } = await listGraphql.checkDataValueList(body.email)
+
+  if (body.value > listGraphqlValue.valuePurchased) {
+    ctx.body = {
+      message:
+        HTTP_ERROR_MESSAGES.valueBiggerThanCouldBe +
+        listGraphqlValue.valuePurchased.toString(),
+    }
+    ctx.status = ERROR
+
+    return
+  }
+
+  const masterdataInfo = await getInfoMasterdata(ctx, body.email)
+
+  let result = false
 
   if (masterdataInfo.data[0] === undefined) {
     const register = await profileSystem.getRegisterOnProfileSystem(
@@ -51,7 +77,7 @@ export async function createGiftCard(ctx: Context) {
     result = await giftCard.addCreditInGiftCard(
       valueGiftCard.redemptionCode,
       valueGiftCard.id,
-      listGraphqlValue.valuePurchased / 100
+      body.value
     )
 
     const saveValues: SaveMasterdataValues = {
@@ -59,11 +85,11 @@ export async function createGiftCard(ctx: Context) {
       email: body.email,
       profileId: register,
       redemptionCode: valueGiftCard.redemptionCode,
-      quantityAlreadyInGiftCard: listGraphqlValue.valuePurchased / 100,
+      quantityAlreadyInGiftCard: body.value,
       history: [
         {
           dateAndTime: new Date().toISOString(),
-          value: listGraphqlValue.valuePurchased / 100,
+          value: body.value,
         },
       ],
     }
@@ -75,44 +101,36 @@ export async function createGiftCard(ctx: Context) {
         id: valueGiftCard.id,
         redemptionCode: valueGiftCard.redemptionCode,
       }
-      ctx.status = SUCESS
+      ctx.status = SUCCESS
     } else {
       ctx.body = HTTP_ERROR_MESSAGES.failed
       ctx.status = ERROR
     }
   } else {
-    const valueBefore = masterdataInfo.data[0]
-      .quantityAlreadyInGiftCard as number
+    result = await giftCard.addCreditInGiftCard(
+      masterdataInfo.data[0].redemptionCode as string,
+      masterdataInfo.data[0].giftCardId as string,
+      body.value as number
+    )
 
-    const valueInList = listGraphqlValue.valuePurchased / 100
+    await updateInfoMasterdata(
+      ctx,
+      masterdataInfo.data[0].id as string,
+      (masterdataInfo.data[0].quantityAlreadyInGiftCard as number) +
+        (body.value as number),
+      masterdataInfo.data[0].history as HistoryInterface[],
+      body.value as number
+    )
+  }
 
-    if (valueInList - valueBefore !== 0) {
-      result = await giftCard.addCreditInGiftCard(
-        masterdataInfo.data[0].redemptionCode as string,
-        masterdataInfo.data[0].giftCardId as string,
-        (valueInList - valueBefore) as number
-      )
-
-      await updateInfoMasterdata(
-        ctx,
-        masterdataInfo.data[0].id as string,
-        listGraphqlValue.valuePurchased / 100,
-        masterdataInfo.data[0].history as HistoryInterface[],
-        (valueInList - valueBefore) as number
-      )
-    } else {
-      result = true
+  if (result) {
+    ctx.body = {
+      id: masterdataInfo.data[0].giftCardId,
+      redemptionCode: masterdataInfo.data[0].redemptionCode,
     }
-
-    if (result) {
-      ctx.body = {
-        id: masterdataInfo.data[0].giftCardId,
-        redemptionCode: masterdataInfo.data[0].redemptionCode,
-      }
-      ctx.status = SUCESS
-    } else {
-      ctx.body = HTTP_ERROR_MESSAGES.failed
-      ctx.status = ERROR
-    }
+    ctx.status = SUCCESS
+  } else {
+    ctx.body = HTTP_ERROR_MESSAGES.failed
+    ctx.status = ERROR
   }
 }

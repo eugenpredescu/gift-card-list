@@ -10,8 +10,8 @@
       "path": "/_v/createGiftCard",
       "public": false
     },
-    "routeHistoric": {
-      "path": "/_v/routeHistoric",
+    "routeHistory": {
+      "path": "/_v/routeHistory",
       "public": false
     },
     "routeRedemptionCode": {

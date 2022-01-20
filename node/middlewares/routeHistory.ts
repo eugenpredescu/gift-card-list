@@ -1,9 +1,10 @@
 import { json } from 'co-body'
 
+import { ERROR, HTTP_ERROR_MESSAGES, SUCCESS } from '../utils/constants'
 import { getInfoMasterdata } from '../utils/listMasterdata'
 import { validateEmail } from '../utils/validateEmail'
 
-export async function routeHistoric(ctx: Context) {
+export async function routeHistory(ctx: Context) {
   const body = await json(ctx.req)
 
   if (!body.email) {
@@ -24,7 +25,7 @@ export async function routeHistoric(ctx: Context) {
 
   if (masterdataInfo.data[0] !== undefined) {
     ctx.body = masterdataInfo.data[0].history
-    ctx.status = SUCESS
+    ctx.status = SUCCESS
   } else {
     ctx.body = HTTP_ERROR_MESSAGES.failed
     ctx.status = ERROR

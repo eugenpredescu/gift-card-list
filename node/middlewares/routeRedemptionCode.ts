@@ -1,5 +1,6 @@
 import { json } from 'co-body'
 
+import { ERROR, HTTP_ERROR_MESSAGES, SUCCESS } from '../utils/constants'
 import { getInfoMasterdata } from '../utils/listMasterdata'
 import { validateEmail } from '../utils/validateEmail'
 
@@ -24,7 +25,7 @@ export async function routeRedemptionCode(ctx: Context) {
 
   if (masterdataInfo.data[0] !== undefined) {
     ctx.body = masterdataInfo.data[0].redemptionCode
-    ctx.status = SUCESS
+    ctx.status = SUCCESS
   } else {
     ctx.body = HTTP_ERROR_MESSAGES.failed
     ctx.status = ERROR

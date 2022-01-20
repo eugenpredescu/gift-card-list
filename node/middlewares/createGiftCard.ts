@@ -1,6 +1,6 @@
 import { json } from 'co-body'
 
-import { ERROR, HTTP_ERROR_MESSAGES, SUCESS } from '../utils/constants'
+import { ERROR, HTTP_ERROR_MESSAGES, SUCCESS } from '../utils/constants'
 import {
   getInfoMasterdata,
   saveInfoMasterdata,
@@ -101,7 +101,7 @@ export async function createGiftCard(ctx: Context) {
         id: valueGiftCard.id,
         redemptionCode: valueGiftCard.redemptionCode,
       }
-      ctx.status = SUCESS
+      ctx.status = SUCCESS
     } else {
       ctx.body = HTTP_ERROR_MESSAGES.failed
       ctx.status = ERROR
@@ -127,7 +127,7 @@ export async function createGiftCard(ctx: Context) {
         id: masterdataInfo.data[0].giftCardId,
         redemptionCode: masterdataInfo.data[0].redemptionCode,
       }
-      ctx.status = SUCESS
+      ctx.status = SUCCESS
     } else {
       ctx.body = HTTP_ERROR_MESSAGES.failed
       ctx.status = ERROR

@@ -8,15 +8,39 @@
   "routes": {
     "createGiftCard": {
       "path": "/_v/createGiftCard",
-      "public": false
+      "public": false,
+      "access": "authorized",
+      "policies": [
+        {
+          "effect": "allow",
+          "actions": ["post"],
+          "principals": ["vrn:apps:*:*:*:app/vtex.list@*"]
+        }
+      ]
     },
     "routeHistory": {
       "path": "/_v/routeHistory",
-      "public": false
+      "public": false,
+      "access": "authorized",
+      "policies": [
+        {
+          "effect": "allow",
+          "actions": ["post"],
+          "principals": ["vrn:apps:*:*:*:app/vtex.list@*"]
+        }
+      ]
     },
     "routeRedemptionCode": {
       "path": "/_v/routeRedemptionCode",
-      "public": false
+      "public": false,
+      "access": "authorized",
+      "policies": [
+        {
+          "effect": "allow",
+          "actions": ["post"],
+          "principals": ["vrn:apps:*:*:*:app/vtex.list@*"]
+        }
+      ]
     }
   }
 }

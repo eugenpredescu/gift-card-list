@@ -3,7 +3,7 @@
   "giftcard.pageblock.title": "Configurações do Gift Card",
   "giftcard.dropdown.label": "Nome da account principal",
   "giftcard.dropodown.placeholder": "Escolha qual a account principal",
-  "giftcard.dropdown.description": "A account principal é aonde os donos da lista de presente irão comprar seus produtos com o gift card",
+  "giftcard.dropdown.description": "A account principal é a account na qual se está a loja principal do cliente",
   "giftcard.button.save": "Salvar",
   "giftcard.data.save": "Dado salvo!",
   "giftcard.data.save.errors": "Erro ao salvar o dado",

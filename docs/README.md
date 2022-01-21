@@ -1,139 +1,53 @@
+# O aplicativo Gift Card List
 
+O aplicativo de Gift Card List tem como objetivo expor rotas para que o aplicativo de listas (vtex.list) possa criar um gift card para os donos da lista e adicionar crédito referente aos presentes recebidos nessas listas. Também contém uma aplicação no admin para que o dono da loja possa definir qual será a account principal (account onde os produtos estão sendo vendidos)
 
-# Service Example
+## Instalando
 
-A reference app implementing a VTEX IO service with HTTP route handlers.
+### O ADMIN
 
-![Service Example Architecture](https://user-images.githubusercontent.com/18706156/77381360-72489680-6d5c-11ea-9da8-f4f03b6c5f4c.jpg)
+Para instalar o aplicativo no admin e, assim, gerenciar qual será a account principal, deve-se entrar em seu terminal, logar no workspace e digitar o comando:
 
-We use [**KoaJS**](https://koajs.com/) as the web framework, so you might want to get into that
-
-We also use the [**node-vtex-api**](https://github.com/vtex/node-vtex-api), a VTEX set of utilities for Node services. You can import this package using NPM from `@vtex/api` (already imported on this project)
-
-- Start from `node/index.ts` and follow the comments and imports :)
-
-## Recipes
-
-### Defining routes on _service.json_ 
 ```json
-{
-  "memory": 256,
-  "ttl": 10,
-  "timeout": 2,
-  "minReplicas": 2,
-  "maxReplicas": 4,
-  "routes": {
-    "status": {
-      "path": "/_v/status/:code",
-      "public": true
-    }
-  }
-}
+  vtex install vtex.gift-card-list@0.x
 ```
 
-The `service.json` file that sits on the root of the `node` folder holds informations about this service, like the maximum timeout and number of replicas, what might be discontinued on the future, but also **sets its routes**. 
+### O Back-end
+Para disponibilizar o componente em sua loja, é necessário adicionar nas "dependencies" do manifest o seguinte código:
 
-Koa uses the [path-to-regexp](https://github.com/pillarjs/path-to-regexp) format for defining routes and, as seen on the example, we use the `:code` notation for declaring a **route param** named code, in this case. A HTTP request for `https://{{workspace}}--{{account}}.myvtex.com/_v/status/500` will match the route we've defined. 
+  "vtex.gift-card-list": "0.x"
+Em seguida, já é possível adicionar o componente de gift card list em seu aplicativo.
 
-For cach _key_ on the `routes` object, there should be a **corresponding entry** on the exported Service object on `node/index.ts`, this will hook your code to a specific route.
+## O funcionamento
 
-### Access Control
-You can also provide a `public` option for each route. If `true`, that resource will be reachable for everyone on the internet. If `false`, VTEX credentials will be requested as well.
+### No ADMIN
 
-Another way of controlling access to specific routes is using **ReBACs (Resource-based access)**, that supports more robust configuration. You can read more [on this document](https://docs.google.com/document/d/1ZxNHMFIXfXz3BgTN9xyrHL3V5dYz14wivYgQjRBZ6J8/edit#heading=h.z7pad3qd2qw7) (VTEX only).
+Após instalar o aplicativo em sua loja, já estará disponível em seu ambiente ADMIN o aplicativo de Configurações do Gift Card.
+Para utilizá-lo, basta acessar a barra lateral em "OUTROS", a qual deve conter o aplicativo "Configurações do Gift Card".
+Clicando no aplicativo, deverá visualizar a seguinte página:
 
-#### Query String
-For `?accepting=query-string`, you **don't need to declare anything**, as any query provided to the URL will already be available for you to use on the code as `ctx.query`, already parsed as an object, or `ctx.queryString`, taken directly from the URL as a string.
+![Captura de Tela 2022-01-21 às 11 32 20 (2)](https://user-images.githubusercontent.com/80836180/150544610-04fa9a7e-f5ed-4498-bc63-827526097bd7.png)
 
-#### Route Params
-Route Params will be available for you to use on the code as `ctx.vtex.params`, already parsed as an object.
-For a path like `/_v/status/:code`, if you receive the request `/_v/status/200`, `ctx.vtex.params` will return `{ code: '200' }`
+Nessa página é possível escolher qual será a account principal
 
-#### HTTP methods
-When you define a route on the `service.json`, your NodeJS handlers for that route will be triggered  **on every HTTP method** (GET, POST, PUT...), so, if you need to handle them separately you need to implement a "sub-router". Fortunately, the _node-vtex-api_ provides a helper function `method`, exported from `@vtex/api`, to accomplish that behaviour. Instead of passing your handlers directly to the corresponding route on `index.ts`, you pass a `method` call passing **an object with the desired method as key and one handler as its corresponding value**. Check this example:
-```typescript
-import { method } from '@vtex/api'
-...
+Um exemplo de como pode-se ser escolhida a account.
 
-export default new Service<Clients, State>({
-  clients,
-  routes: {
-    status: method({
-      GET: statusGetHandler,
-      POST: statusPostHandler,
-    }),
-  },
-})
-```
+Para escolher a account deve-se clicar no campo 'Nome da account principal' e escolher uma das opções mostradas
+![Captura de Tela 2022-01-21 às 11 39 42 (2)](https://user-images.githubusercontent.com/80836180/150545843-91ba92bb-3c16-42d8-84ec-ff7015a2a1e4.png)
 
-### Throwing errors
+Em seguida deve-se confirmar a troca
+![Captura de Tela 2022-01-21 às 11 40 12 (2)](https://user-images.githubusercontent.com/80836180/150545849-cd2171f9-8285-4970-9133-567f620da689.png)
 
-When building a HTTP service, we should follow HTTP rules regarding data types, cache, authorization, and status code. Our example app sets a `ctx.status` value that will be used as a HTTP status code return value, but often we also want to give proper information about errors as well.
-
-The **node-vtex-api** already exports a handful of **custom error classes** that can be used for that purpose, like the `NotFoundError`. You just need to throw them inside one of the the route handlers that the appropriate response will be sent to the server.
-
-```typescript
-import { UserInputError } from '@vtex/api'
-
-export async function validate(ctx: Context, next: () => Promise<any>) {
-  const { code } = ctx.vtex.route.params
-  if (isNaN(code) || code < 100 || code > 600) {
-    throw new UserInputError('Code must be a number between 100 and 600')
-  }
-...
-```
-
-You can check all the available errors [here](https://github.com/vtex/node-vtex-api/tree/fd6139349de4e68825b1074f1959dd8d0c8f4d5b/src/errors), but some are not useful for just-HTTP services. Check the most useful ones:
-
-|Error Class | HTTP Code |
-|--|:--:|
-| `UserInputError` | 400 |
-| `AuthenticationError` | 401 |
-| `ForbiddenError` | 403 |
-| `NotFoundError` | 404 |
-
-You can also **create your custom error**, just see how it's done above ;)
-
-### Reading a JSON body
-
-When writing POST or PUT handlers, for example, often you need to have access to the **request body** that comes as a JSON format, which is not provided directly by the handler function.
-
-For this, you have to use the [co-body](https://www.npmjs.com/package/co-body) package that will parse the request into a readable JSON object, used as below: 
-```typescript
-import { json } from 'co-body'
-export async function method(ctx: Context, next: () => Promise<any>) {
-    const body = await json(ctx.req)
-```
-
-### Other example apps
-
-We use Node services across all VTEX, and there are a lot inspiring examples. If you want to dive deeper on learning about this subject, don't miss those internal apps: [builder-hub](https://github.com/vtex/builder-hub) or [store-sitemap](https://github.com/vtex-apps/store-sitemap)
+E por fim é retornado um aviso se o salvamento foi ou não concluído com sucesso
+![Captura de Tela 2022-01-21 às 11 40 16 (2)](https://user-images.githubusercontent.com/80836180/150545854-0b8c9543-f59c-4966-aea1-5b7f63ec9aea.png)
 
 
-## Testing
+### No aplicativo de Lista na Store
 
-`@vtex/test-tools` and `@types/jest` should be installed on `./node` package as `devDependencies`.
+Quando se entra em minhas listas pode-se encontrar um campo de adicionar crédito no giftcard.
 
-Run `vtex test` and [Jest](https://jestjs.io/) will do its thing.
+ADICIONAR UMA FOTO DA PAGINA DA LISTA COM O BOTÃO DO GIFT CARD
 
-Check the `node/__tests__/simple.test.ts` test case and also [Jest's Documentation](https://jestjs.io/docs/en/getting-started).
+Caso haja crédito disponível para ser adicionado no gift card, o dono da lista poderá escolher quanto crédito quer disponibilizar no gift card. E ao adicionar esse valor, é retornado para o usuário um código do vale presente. Assim que houver crédito no gift card o dono da lista já poserá usa-lo na loja principal.
+Para utilizar o crédito disponível pode se logar na loja e utilizar o vale presente que aparecerá no campo de pagamento. Outra forma de utilizar é com o código de vale presente que foi devolvido na página de lista (ver foto acima)
 
-## Splunk Dashboard
-
-We have an (for now, VTEX-only, internal) Splunk dashboard to show all metrics related to your app. You can find it [here](https://splunk7.vtex.com/en-US/app/vtex_colossus/node_app_metrics).
-
-After linking this app and making some requests, you can select `vtex.service-example` and see the metrics for your app. **Don't forget to check the box Development, as you are linking your app in a development workspace**.
-
-For convenience, the link for the current version: https://splunk7.vtex.com/en-US/app/vtex_colossus/node_app_metrics?form.time.earliest=-30m%40m&form.time.latest=%40m&form.picked_context=false&form.picked_region=aws-us-east-*&form.picked_service=vtex.service-example
-
-
-**Upcoming documentation:**
-
- - [Feature/giftcard](https://github.com/vtex-apps/gift-card-list/pull/1)
- - [add infos list-graphql](https://github.com/vtex-apps/gift-card-list/pull/2)
- - [Feature/masterdata](https://github.com/vtex-apps/gift-card-list/pull/3)
- - [Feature/new masterdata](https://github.com/vtex-apps/gift-card-list/pull/4)
- - [rota para resgatar o RedemptionCode](https://github.com/vtex-apps/gift-card-list/pull/6)
- - [Feature/admin](https://github.com/vtex-apps/gift-card-list/pull/8)
- - [Feature/test admin](https://github.com/vtex-apps/gift-card-list/pull/9)
- - [Feature/value gift card](https://github.com/vtex-apps/gift-card-list/pull/10)

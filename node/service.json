@@ -25,7 +25,7 @@
       "policies": [
         {
           "effect": "allow",
-          "actions": ["post"],
+          "actions": ["get"],
           "principals": ["vrn:apps:*:*:*:app/vtex.list@*"]
         }
       ]
@@ -37,7 +37,7 @@
       "policies": [
         {
           "effect": "allow",
-          "actions": ["post"],
+          "actions": ["get"],
           "principals": ["vrn:apps:*:*:*:app/vtex.list@*"]
         }
       ]

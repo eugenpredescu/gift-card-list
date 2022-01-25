@@ -12,7 +12,7 @@ describe('VLM Client', () => {
 
   const VlmClient = new Vlm(MOCKED_CONTEXT, MOCKED_OPTIONS)
 
-  it('Test if getAccounts it works and have a return', async () => {
+  it('should test if the function getAccounts works and have a return', async () => {
     // @ts-ignore
     // eslint-disable-next-line prettier/prettier
     const get = jest.spyOn(VlmClient.http, 'get').mockResolvedValue({

@@ -12,7 +12,7 @@ describe('List Graphql Client', () => {
 
   const ListGraphqlClient = new ListGraphql(MOCKED_CONTEXT, MOCKED_OPTIONS)
 
-  it('Test if checkDataValueList it works and have a return', async () => {
+  it('should test if function checkDataValueList work right and have a valid return', async () => {
     // @ts-ignore
     const get = jest.spyOn(ListGraphqlClient.http, 'get').mockResolvedValue([
       { ownerName: 'name', valuePurchased: 1 },

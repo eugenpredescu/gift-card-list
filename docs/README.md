@@ -1,6 +1,6 @@
 # O aplicativo Gift Card List
 
-O aplicativo de Gift Card List tem como objetivo expor rotas para que o aplicativo de listas (vtex.list) possa criar um gift card para os donos da lista e adicionar crédito referente aos presentes recebidos nessas listas. Também contém uma aplicação no admin para que o dono da loja possa definir qual será a account principal (account onde os produtos estão sendo vendidos)
+O aplicativo de Gift Card List tem como objetivo expor rotas para que o aplicativo de listas [vtex.list](https://github.com/vtex-apps/list)  possa criar um gift card para os donos da lista e adicionar crédito referente aos presentes recebidos nessas listas. Também contém uma aplicação no admin para que o dono da loja possa definir qual será a account principal (account onde os produtos estão sendo vendidos)
 
 ## Instalando
 
@@ -13,9 +13,14 @@ Para instalar o aplicativo no admin e, assim, gerenciar qual será a account pri
 ```
 
 ### O Back-end
-Para disponibilizar o componente em sua loja, é necessário adicionar nas "dependencies" do manifest o seguinte código:
+Para disponibilizar o componente em sua loja, é necessário adicionar nas `dependencies` do manifest o seguinte código:
 
-  "vtex.gift-card-list": "0.x"
+```json
+  "dependencies": {
+      "vtex.gift-card-list": "0.x"
+    }
+```
+
 Em seguida, já é possível adicionar o componente de gift card list em seu aplicativo.
 
 ## O funcionamento
@@ -30,7 +35,7 @@ Clicando no aplicativo, deverá visualizar a seguinte página:
 
 Nessa página é possível escolher qual será a account principal
 
-Um exemplo de como pode-se ser escolhida a account.
+Um exemplo de como pode ser escolhida a account.
 
 Para escolher a account deve-se clicar no campo 'Nome da account principal' e escolher uma das opções mostradas
 ![Captura de Tela 2022-01-21 às 11 39 42 (2)](https://user-images.githubusercontent.com/80836180/150545843-91ba92bb-3c16-42d8-84ec-ff7015a2a1e4.png)
@@ -48,6 +53,6 @@ Quando se entra em minhas listas pode-se encontrar um campo de adicionar crédit
 
 ADICIONAR UMA FOTO DA PAGINA DA LISTA COM O BOTÃO DO GIFT CARD
 
-Caso haja crédito disponível para ser adicionado no gift card, o dono da lista poderá escolher quanto crédito quer disponibilizar no gift card. E ao adicionar esse valor, é retornado para o usuário um código do vale presente. Assim que houver crédito no gift card o dono da lista já poserá usa-lo na loja principal.
+Caso haja crédito disponível para ser adicionado no gift card, o dono da lista poderá escolher quanto crédito quer disponibilizar no gift card. E ao adicionar esse valor, é retornado para o usuário um código do vale presente. Assim que houver crédito no gift card o dono da lista já poderá usa-lo na loja principal.
 Para utilizar o crédito disponível pode se logar na loja e utilizar o vale presente que aparecerá no campo de pagamento. Outra forma de utilizar é com o código de vale presente que foi devolvido na página de lista (ver foto acima)
 

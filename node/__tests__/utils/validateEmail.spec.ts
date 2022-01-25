@@ -1,14 +1,14 @@
 import { validateEmail } from '../../utils/validateEmail'
 
 describe('Test validateEmail', () => {
-  it('Test if return false if a send a invalid email', async () => {
+  it('should test if return false if a send a invalid email', async () => {
     const returnValueWithoutSign = validateEmail('invalidEmail')
     const returnValueWithSign = validateEmail('invalidEmail@email')
 
     expect(returnValueWithoutSign).toBe(false)
     expect(returnValueWithSign).toBe(false)
   })
-  it('Test if return true if a send a valid email', async () => {
+  it('should test if return true if a send a valid email', async () => {
     const returnValue = validateEmail('email@email.com')
 
     expect(returnValue).toBe(true)

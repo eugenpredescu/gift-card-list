@@ -2,7 +2,7 @@
 import { getSettings } from '../../resolvers/getSettings'
 
 describe('Test getSettings', () => {
-  it('test if function getAppSettings return value', async () => {
+  it('should test if function getAppSettings have a value return', async () => {
     // @ts-ignore
     const ctx = {
       vtex: {

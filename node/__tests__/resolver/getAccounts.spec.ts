@@ -2,7 +2,7 @@
 import { getAccounts } from '../../resolvers/getAccounts'
 
 describe('Test getAccounts', () => {
-  it('Test if getAccounts have a return', async () => {
+  it('should test if the function getAccounts have a return', async () => {
     // @ts-ignore
     const ctx = {
       clients: {

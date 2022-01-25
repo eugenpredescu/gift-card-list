@@ -12,7 +12,7 @@ import {
 } from '../../__mocks__/contexts'
 
 describe('Test createGiftCrad', () => {
-  it('testing if the return value is an error if I dont send an email', async () => {
+  it('should test if the return value is an error if I dont send an email', async () => {
     jest
       .spyOn(co_body, 'json')
       .mockImplementation()
@@ -28,7 +28,7 @@ describe('Test createGiftCrad', () => {
     expect(ctx.status).toBe(ERROR)
   })
 
-  it('testing if the return value is an error if I send invalid an email', async () => {
+  it('should test if the return value is an error if I send invalid an email', async () => {
     jest
       .spyOn(co_body, 'json')
       .mockImplementation()
@@ -45,7 +45,7 @@ describe('Test createGiftCrad', () => {
     expect(ctx.status).toBe(ERROR)
   })
 
-  it('testing if the return value is an error if I dont send a value', async () => {
+  it('should test if the return value is an error if I dont send a value', async () => {
     jest
       .spyOn(co_body, 'json')
       .mockImplementation()
@@ -61,7 +61,7 @@ describe('Test createGiftCrad', () => {
     expect(ctx.status).toBe(ERROR)
   })
 
-  it('testing if the return value is an error if I send a value <= 0', async () => {
+  it('should test if the return value is an error if I send a value <= 0', async () => {
     jest
       .spyOn(co_body, 'json')
       .mockImplementation()
@@ -78,7 +78,7 @@ describe('Test createGiftCrad', () => {
     expect(ctx.status).toBe(ERROR)
   })
 
-  it('testing if the return value is an error if I send a value > listGraphqlValue.valuePurchased', async () => {
+  it('should test if the return value is an error if I send a value > listGraphqlValue.valuePurchased', async () => {
     jest
       .spyOn(co_body, 'json')
       .mockImplementation()
@@ -97,7 +97,7 @@ describe('Test createGiftCrad', () => {
     expect(ctx.status).toBe(ERROR)
   })
 
-  it('testing if the return success when the function addCreditInGiftCard return true and dont have a giftcard before', async () => {
+  it('should test if the return success when the function addCreditInGiftCard return true and dont have a giftcard before', async () => {
     jest
       .spyOn(co_body, 'json')
       .mockImplementation()
@@ -115,7 +115,7 @@ describe('Test createGiftCrad', () => {
     expect(ctxMasterdataUndefinedTrue.status).toBe(SUCCESS)
   })
 
-  it('testing if the return error when the function addCreditInGiftCard return false and dont have a giftcard before', async () => {
+  it('should test if the return error when the function addCreditInGiftCard return false and dont have a giftcard before', async () => {
     jest
       .spyOn(co_body, 'json')
       .mockImplementation()
@@ -132,7 +132,7 @@ describe('Test createGiftCrad', () => {
     expect(ctxMasterdataUndefinedFalse.status).toBe(ERROR)
   })
 
-  it('testing if the return success when the function addCreditInGiftCard return true and have a giftcard before', async () => {
+  it('should test if the return success when the function addCreditInGiftCard return true and have a giftcard before', async () => {
     jest
       .spyOn(co_body, 'json')
       .mockImplementation()
@@ -150,7 +150,7 @@ describe('Test createGiftCrad', () => {
     expect(ctxMasterdataValueTrue.status).toBe(SUCCESS)
   })
 
-  it('testing if the return error when the function addCreditInGiftCard return false and have a giftcard before', async () => {
+  it('should test if the return error when the function addCreditInGiftCard return false and have a giftcard before', async () => {
     jest
       .spyOn(co_body, 'json')
       .mockImplementation()

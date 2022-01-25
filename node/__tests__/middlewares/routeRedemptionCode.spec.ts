@@ -6,7 +6,7 @@ import { ERROR, HTTP_ERROR_MESSAGES, SUCCESS } from '../../utils/constants'
 import { ctx, ctxRouteError, ctxRouteSuccess } from '../../__mocks__/contexts'
 
 describe('Test routeRedemptionCode', () => {
-  it('testing if the return value is an error if I dont send an email', async () => {
+  it('should test if the return value is an error if I dont send an email', async () => {
     jest
       .spyOn(co_body, 'json')
       .mockImplementation()
@@ -20,7 +20,7 @@ describe('Test routeRedemptionCode', () => {
     expect(ctx.status).toBe(ERROR)
   })
 
-  it('testing if the return value is an error if I send invalid an email', async () => {
+  it('should test if the return value is an error if I send invalid an email', async () => {
     jest
       .spyOn(co_body, 'json')
       .mockImplementation()
@@ -36,7 +36,7 @@ describe('Test routeRedemptionCode', () => {
     expect(ctx.status).toBe(ERROR)
   })
 
-  it('testing if the return is a success if have a redemptionCode', async () => {
+  it('should test if the return is a success if have a redemptionCode', async () => {
     jest
       .spyOn(co_body, 'json')
       .mockImplementation()
@@ -50,7 +50,7 @@ describe('Test routeRedemptionCode', () => {
     expect(ctxRouteSuccess.status).toBe(SUCCESS)
   })
 
-  it('testing if the return is an error if dont have a redemptionCode', async () => {
+  it('should test if the return is an error if dont have a redemptionCode', async () => {
     jest
       .spyOn(co_body, 'json')
       .mockImplementation()

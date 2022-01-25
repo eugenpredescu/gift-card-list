@@ -1,19 +1,22 @@
-# O aplicativo Gift Card List
+# The Gift Card List Application
 
-O aplicativo de Gift Card List tem como objetivo expor rotas para que o aplicativo de listas [vtex.list](https://github.com/vtex-apps/list)  possa criar um gift card para os donos da lista e adicionar crédito referente aos presentes recebidos nessas listas. Também contém uma aplicação no admin para que o dono da loja possa definir qual será a account principal (account onde os produtos estão sendo vendidos)
+O aplicativo de Gift Card List tem como objetivo expor rotas para que o aplicativo de listas [vtex.list](https://github.com/vtex-apps/list) possa criar um gift card para os donos da lista e adicionar crédito referente aos presentes recebidos nessas listas. Também contém uma aplicação no admin para que o dono da loja possa definir qual será a account principal (account onde os produtos estão sendo vendidos)
 
-## Instalando
+The Gift Card List app aims to expose routes so that the list app [vtex.list](https://github.com/vtex-apps/list) can create a gift card for the list owners and add credit regarding gifts received on these lists. It also contains an admin application so that the store owner can define which will be the main account (account where the products are being sold)
 
-### O ADMIN
+## Installing
 
-Para instalar o aplicativo no admin e, assim, gerenciar qual será a account principal, deve-se entrar em seu terminal, logar no workspace e digitar o comando:
+### The ADMIN
+
+To install the application in the admin and, thus, manage which will be the main account, you must enter in your terminal, log in to the workspace and enter the command:
 
 ```json
   vtex install vtex.gift-card-list@0.x
 ```
 
-### O Back-end
-Para disponibilizar o componente em sua loja, é necessário adicionar nas `dependencies` do manifest o seguinte código:
+### The Back-end
+
+To make the component available in your store, you need to add the following code to the `dependencies` of the manifest:
 
 ```json
   "dependencies": {
@@ -21,38 +24,38 @@ Para disponibilizar o componente em sua loja, é necessário adicionar nas `depe
     }
 ```
 
-Em seguida, já é possível adicionar o componente de gift card list em seu aplicativo.
+Then you can add the gift card list component in your application.
 
-## O funcionamento
+## The Operation
 
-### No ADMIN
+### On ADMIN
 
-Após instalar o aplicativo em sua loja, já estará disponível em seu ambiente ADMIN o aplicativo de Configurações do Gift Card.
-Para utilizá-lo, basta acessar a barra lateral em "OUTROS", a qual deve conter o aplicativo "Configurações do Gift Card".
-Clicando no aplicativo, deverá visualizar a seguinte página:
+After installing the application in your store, the Gift Card Settings application will already be available in your ADMIN environment.
+To use it, just access the sidebar under "OTHERS", which should contain the "Gift Card Settings" application.
+Clicking on the application, you should see the following page:
 
 ![Captura de Tela 2022-01-21 às 11 32 20 (2)](https://user-images.githubusercontent.com/80836180/150544610-04fa9a7e-f5ed-4498-bc63-827526097bd7.png)
 
-Nessa página é possível escolher qual será a account principal
+On this page it is possible to choose which will be the main account
 
-Um exemplo de como pode ser escolhida a account.
 
-Para escolher a account deve-se clicar no campo 'Nome da account principal' e escolher uma das opções mostradas
+An example of how the account can be chosen.
+
+To choose the account, click on the 'Main account name' field and choose one of the options shown
 ![Captura de Tela 2022-01-21 às 11 39 42 (2)](https://user-images.githubusercontent.com/80836180/150545843-91ba92bb-3c16-42d8-84ec-ff7015a2a1e4.png)
 
-Em seguida deve-se confirmar a troca
+Then confirm the exchange
 ![Captura de Tela 2022-01-21 às 11 40 12 (2)](https://user-images.githubusercontent.com/80836180/150545849-cd2171f9-8285-4970-9133-567f620da689.png)
 
-E por fim é retornado um aviso se o salvamento foi ou não concluído com sucesso
+Finally, a warning is returned whether the save was successfully completed or not.
 ![Captura de Tela 2022-01-21 às 11 40 16 (2)](https://user-images.githubusercontent.com/80836180/150545854-0b8c9543-f59c-4966-aea1-5b7f63ec9aea.png)
 
 
-### No aplicativo de Lista na Store
+### In the List App in the Store
 
-Quando se entra em minhas listas pode-se encontrar um campo de adicionar crédito no giftcard.
+When you enter my lists you can find a field to add credit to the giftcard.
 
 ADICIONAR UMA FOTO DA PAGINA DA LISTA COM O BOTÃO DO GIFT CARD
 
-Caso haja crédito disponível para ser adicionado no gift card, o dono da lista poderá escolher quanto crédito quer disponibilizar no gift card. E ao adicionar esse valor, é retornado para o usuário um código do vale presente. Assim que houver crédito no gift card o dono da lista já poderá usa-lo na loja principal.
-Para utilizar o crédito disponível pode se logar na loja e utilizar o vale presente que aparecerá no campo de pagamento. Outra forma de utilizar é com o código de vale presente que foi devolvido na página de lista (ver foto acima)
-
+If there is credit available to be added to the gift card, the owner of the list will be able to choose how much credit he wants to make available on the gift card. And when adding this value, a gift card code is returned to the user. As soon as there is credit on the gift card, the owner of the list will be able to use it in the main store.
+To use the available credit, you can log in to the store and use the gift card that will appear in the payment field. Another way to use it is with the gift card code that was returned on the list page (see photo above)

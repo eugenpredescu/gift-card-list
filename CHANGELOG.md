@@ -6,72 +6,71 @@ All notable changes to this project will be documented in this file.
 
 ## [0.11.0] - 2022-01-20
 ### Changed
--  Tornando as rotas privativas, para que só o aplicativo vtex.list possa chama-las
+- Making the routes private, so that only the vtex.list application can call them
 
 ## [0.10.0] - 2022-01-20
 ### Changed
--  Testes back-end
+- Back-end tests
 
 ## [0.9.0] - 2022-01-20
 ### Changed
-- Trocando a forma de como adicionar credito no gift card. Anteriormente era adicionado todo valor disponível na lista para o gift card, agora o usuário escolhe o valor a ser adicionado no gift card
-
+- Changing the way to add credit to the gift card. Previously, all value available in the list was added to the gift card, now the user chooses the value to be added to the gift card
 
 ## [0.8.0] - 2022-01-18
 ### Changed
-- Criando uma tela no admin para que o dono da loja possa escolher qual account que será usada para os donos da lista comprem o produtos com seu gift card
-- Adicionando rotas para acessar os dados e salvar dados novo no back-end
-- Adiconando react-intl nos componentes
+- Creating a screen in the admin so the store owner can choose which account will be used for the list owners to buy the products with their gift card
+- Adding routes to access data and save new data in the backend
+- Adding react-intl to components
 
 ## [0.7.0] - 2022-01-18
 ### Changed
-- Testes do admin
+- Admin tests
 
 
 ## [0.6.0] - 2022-01-13
 ### Changed
-- Criar uma rota que retorne todas as subaccount de uma account
-- Salvar a escolha desse subacocunt no settings
-- Criar rota para resgatar qual a subaccount escolhida
-- Juntar o profile system da account utilizada com a subaccount escolhida
-- Desunir uma account de uma subaccount caso seja alterado qual será é a account principal
+- Create a route that returns all subaccounts of an account
+- Save the choice of this subacocunt in the settings
+- Create route to redeem which subaccount is chosen
+- Join the profile system of the account used with the chosen subaccount
+- Unlink an account from a subaccount if it changes which will be the main account
 
 ## [0.5.0] - 2022-01-12
 ### Changed
-- Criando uma rota para acessar o RedemptionCode do gift card de um email definido
-- Trocando mensagens definidas por const
+- Creating a route to access the gift card RedemptionCode from a defined email
+- Exchanging messages defined by const
 
-## [0.3.0] - 2022-01-12
+## [0.4.0] - 2022-01-12
 ### Changed
--  Adicionar um novo campo no schema, o historico de resgate do gift card. 
--  Desenvolvendo uma rota para acessar os historicos de adição de credito no gift card, 
--  Implementando como popular esse campo corretamente no arquivo createGiftCard
+- Add a new field in the schema, the gift card redemption history.
+- Developing a route to access the history of adding credit to the gift card
+- Implementing how to populate this field correctly in the createGiftCard file
 
 ## [0.3.0] - 2022-01-11
 ### Changed
-- Alterando a estrutura do funcionamento do gift card. Anteriormente se adicionava o valor no gift card relacionado a uma única lista do cliente. Agora o valor a ser adicionado no gift card será igual a soma de todas as lista de um cliente
+- Changing the structure of how the gift card works. Previously, the value in the gift card related to a single customer present list. Now the value to be added to the gift card will be equal to the sum of all the lists of a customer
 
 ## [0.2.0] - 2022-01-10
 ### Changed
-- Criando um masterdata para facilitar a adição de valores no gift card
-  Caso não haja um gift card para a lista é criado um novo gift card e adicionado todos os valores gerados relacionado a ele no masterdata
-  Caso já tenha um gift card para uma lista é pego todas as informações no masterdata e adicionado um novo valor no gift card
-- Adicionando funções de searchRaw, save e update no masterdata
-- Reestruturando a lógica para adicionar valores no Gift Card
+- Creating a masterdata to facilitate the addition values in the gift card
+ - If don't have gift card for the present list, a new gift card is created and all generated values related to it are added to the masterdata
+ - If you already have a gift card for the present list, all information is taken from the masterdata and a new value added to the gift card
+- Adding functions searchRaw, save and update in masterdata
+- Restructuring the logic to add values in the Gift Card
 
 ## [0.1.0] - 2022-01-10
 ### Changed
-- Trocando os dados mockados das funções por dados passados pelo usuário
-- Acessando dados do aplicativo vtex.list-graphql para passa-los para a função createRegisterOnProfileSystem
-- Criando função para resgatar valores de um profile system caso já hava cadastro
-- Adicionar dados de requestId para função do addCreditInGiftCard (impedia que alguns creditos não fosse adicionados sem o requestId)
+- Swapping the mocked data of the functions for data passed by the user
+- Accessing data of vtex.list-graphql application to pass it to createRegisterOnProfileSystem function
+- Creating a function to retrieve values from a profile system if there was already a registration on it
+- Add requestId data to addCreditInGiftCard function (prevented some credits not being added without requestId)
 
 
 ## [0.0.1] - 2022-01-10
 ### Changed
-- Configurações inicias do node
-- Validando email
-- Criando um profile system
-- Criando uma nova rota para criar um novo gift card, com o profile system gerado anteriormente, e o resto dos dados mockados 
+- Initial node settings
+- Validating email
+- Creating a profile system
+- Creating a new route to create a new gift card, with the profile system generated earlier, and the rest of the mocked data
 
 

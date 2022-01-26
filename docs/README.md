@@ -1,7 +1,5 @@
 # The Gift Card List Application
 
-O aplicativo de Gift Card List tem como objetivo expor rotas para que o aplicativo de listas [vtex.list](https://github.com/vtex-apps/list) possa criar um gift card para os donos da lista e adicionar crédito referente aos presentes recebidos nessas listas. Também contém uma aplicação no admin para que o dono da loja possa definir qual será a account principal (account onde os produtos estão sendo vendidos)
-
 The Gift Card List app aims to expose routes so that the list app [vtex.list](https://github.com/vtex-apps/list) can create a gift card for the list owners and add credit regarding gifts received on these lists. It also contains an admin application so that the store owner can define which will be the main account (account where the products are being sold)
 
 ## Installing
@@ -55,7 +53,13 @@ Finally, a warning is returned whether the save was successfully completed or no
 
 When you enter my lists you can find a field to add credit to the giftcard.
 
+<!---
 ADICIONAR UMA FOTO DA PAGINA DA LISTA COM O BOTÃO DO GIFT CARD
+-->
+📢 This feature will be implemented in the future
+
+![](https://dummyimage.com/600x400/000/fff)
+
 
 If there is credit available to be added to the gift card, the owner of the list will be able to choose how much credit he wants to make available on the gift card. And when adding this value, a gift card code is returned to the user. As soon as there is credit on the gift card, the owner of the list will be able to use it in the main store.
 To use the available credit, you can log in to the store and use the gift card that will appear in the payment field. Another way to use it is with the gift card code that was returned on the list page (see photo above)

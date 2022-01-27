@@ -1,139 +1,65 @@
+# The Gift Card List Application
 
+The Gift Card List app aims to expose routes so that the list app [vtex.list](https://github.com/vtex-apps/list) can create a gift card for the list owners and add credit regarding gifts received on these lists. It also contains an admin application so that the store owner can define which will be the main account (account where the products are being sold)
 
-# Service Example
+## Installing
 
-A reference app implementing a VTEX IO service with HTTP route handlers.
+### The ADMIN
 
-![Service Example Architecture](https://user-images.githubusercontent.com/18706156/77381360-72489680-6d5c-11ea-9da8-f4f03b6c5f4c.jpg)
+To install the application in the admin and, thus, manage which will be the main account, you must enter in your terminal, log in to the workspace and enter the command:
 
-We use [**KoaJS**](https://koajs.com/) as the web framework, so you might want to get into that
-
-We also use the [**node-vtex-api**](https://github.com/vtex/node-vtex-api), a VTEX set of utilities for Node services. You can import this package using NPM from `@vtex/api` (already imported on this project)
-
-- Start from `node/index.ts` and follow the comments and imports :)
-
-## Recipes
-
-### Defining routes on _service.json_ 
 ```json
-{
-  "memory": 256,
-  "ttl": 10,
-  "timeout": 2,
-  "minReplicas": 2,
-  "maxReplicas": 4,
-  "routes": {
-    "status": {
-      "path": "/_v/status/:code",
-      "public": true
+  vtex install vtex.gift-card-list@0.x
+```
+
+### The Back-end
+
+To make the component available in your store, you need to add the following code to the `dependencies` of the manifest:
+
+```json
+  "dependencies": {
+      "vtex.gift-card-list": "0.x"
     }
-  }
-}
 ```
 
-The `service.json` file that sits on the root of the `node` folder holds informations about this service, like the maximum timeout and number of replicas, what might be discontinued on the future, but also **sets its routes**. 
+Then you can add the gift card list component in your application.
 
-Koa uses the [path-to-regexp](https://github.com/pillarjs/path-to-regexp) format for defining routes and, as seen on the example, we use the `:code` notation for declaring a **route param** named code, in this case. A HTTP request for `https://{{workspace}}--{{account}}.myvtex.com/_v/status/500` will match the route we've defined. 
+## The Operation
 
-For cach _key_ on the `routes` object, there should be a **corresponding entry** on the exported Service object on `node/index.ts`, this will hook your code to a specific route.
+### On ADMIN
 
-### Access Control
-You can also provide a `public` option for each route. If `true`, that resource will be reachable for everyone on the internet. If `false`, VTEX credentials will be requested as well.
+After installing the application in your store, the Gift Card Settings application will already be available in your ADMIN environment.
+To use it, just access the sidebar under "OTHERS", which should contain the "Gift Card Settings" application.
+Clicking on the application, you should see the following page:
 
-Another way of controlling access to specific routes is using **ReBACs (Resource-based access)**, that supports more robust configuration. You can read more [on this document](https://docs.google.com/document/d/1ZxNHMFIXfXz3BgTN9xyrHL3V5dYz14wivYgQjRBZ6J8/edit#heading=h.z7pad3qd2qw7) (VTEX only).
+![Captura de Tela 2022-01-21 às 11 32 20 (2)](https://user-images.githubusercontent.com/80836180/150544610-04fa9a7e-f5ed-4498-bc63-827526097bd7.png)
 
-#### Query String
-For `?accepting=query-string`, you **don't need to declare anything**, as any query provided to the URL will already be available for you to use on the code as `ctx.query`, already parsed as an object, or `ctx.queryString`, taken directly from the URL as a string.
-
-#### Route Params
-Route Params will be available for you to use on the code as `ctx.vtex.params`, already parsed as an object.
-For a path like `/_v/status/:code`, if you receive the request `/_v/status/200`, `ctx.vtex.params` will return `{ code: '200' }`
-
-#### HTTP methods
-When you define a route on the `service.json`, your NodeJS handlers for that route will be triggered  **on every HTTP method** (GET, POST, PUT...), so, if you need to handle them separately you need to implement a "sub-router". Fortunately, the _node-vtex-api_ provides a helper function `method`, exported from `@vtex/api`, to accomplish that behaviour. Instead of passing your handlers directly to the corresponding route on `index.ts`, you pass a `method` call passing **an object with the desired method as key and one handler as its corresponding value**. Check this example:
-```typescript
-import { method } from '@vtex/api'
-...
-
-export default new Service<Clients, State>({
-  clients,
-  routes: {
-    status: method({
-      GET: statusGetHandler,
-      POST: statusPostHandler,
-    }),
-  },
-})
-```
-
-### Throwing errors
-
-When building a HTTP service, we should follow HTTP rules regarding data types, cache, authorization, and status code. Our example app sets a `ctx.status` value that will be used as a HTTP status code return value, but often we also want to give proper information about errors as well.
-
-The **node-vtex-api** already exports a handful of **custom error classes** that can be used for that purpose, like the `NotFoundError`. You just need to throw them inside one of the the route handlers that the appropriate response will be sent to the server.
-
-```typescript
-import { UserInputError } from '@vtex/api'
-
-export async function validate(ctx: Context, next: () => Promise<any>) {
-  const { code } = ctx.vtex.route.params
-  if (isNaN(code) || code < 100 || code > 600) {
-    throw new UserInputError('Code must be a number between 100 and 600')
-  }
-...
-```
-
-You can check all the available errors [here](https://github.com/vtex/node-vtex-api/tree/fd6139349de4e68825b1074f1959dd8d0c8f4d5b/src/errors), but some are not useful for just-HTTP services. Check the most useful ones:
-
-|Error Class | HTTP Code |
-|--|:--:|
-| `UserInputError` | 400 |
-| `AuthenticationError` | 401 |
-| `ForbiddenError` | 403 |
-| `NotFoundError` | 404 |
-
-You can also **create your custom error**, just see how it's done above ;)
-
-### Reading a JSON body
-
-When writing POST or PUT handlers, for example, often you need to have access to the **request body** that comes as a JSON format, which is not provided directly by the handler function.
-
-For this, you have to use the [co-body](https://www.npmjs.com/package/co-body) package that will parse the request into a readable JSON object, used as below: 
-```typescript
-import { json } from 'co-body'
-export async function method(ctx: Context, next: () => Promise<any>) {
-    const body = await json(ctx.req)
-```
-
-### Other example apps
-
-We use Node services across all VTEX, and there are a lot inspiring examples. If you want to dive deeper on learning about this subject, don't miss those internal apps: [builder-hub](https://github.com/vtex/builder-hub) or [store-sitemap](https://github.com/vtex-apps/store-sitemap)
+On this page it is possible to choose which will be the main account
 
 
-## Testing
+An example of how the account can be chosen.
 
-`@vtex/test-tools` and `@types/jest` should be installed on `./node` package as `devDependencies`.
+To choose the account, click on the 'Main account name' field and choose one of the options shown
+![Captura de Tela 2022-01-21 às 11 39 42 (2)](https://user-images.githubusercontent.com/80836180/150545843-91ba92bb-3c16-42d8-84ec-ff7015a2a1e4.png)
 
-Run `vtex test` and [Jest](https://jestjs.io/) will do its thing.
+Then confirm the exchange
+![Captura de Tela 2022-01-21 às 11 40 12 (2)](https://user-images.githubusercontent.com/80836180/150545849-cd2171f9-8285-4970-9133-567f620da689.png)
 
-Check the `node/__tests__/simple.test.ts` test case and also [Jest's Documentation](https://jestjs.io/docs/en/getting-started).
-
-## Splunk Dashboard
-
-We have an (for now, VTEX-only, internal) Splunk dashboard to show all metrics related to your app. You can find it [here](https://splunk7.vtex.com/en-US/app/vtex_colossus/node_app_metrics).
-
-After linking this app and making some requests, you can select `vtex.service-example` and see the metrics for your app. **Don't forget to check the box Development, as you are linking your app in a development workspace**.
-
-For convenience, the link for the current version: https://splunk7.vtex.com/en-US/app/vtex_colossus/node_app_metrics?form.time.earliest=-30m%40m&form.time.latest=%40m&form.picked_context=false&form.picked_region=aws-us-east-*&form.picked_service=vtex.service-example
+Finally, a warning is returned whether the save was successfully completed or not.
+![Captura de Tela 2022-01-21 às 11 40 16 (2)](https://user-images.githubusercontent.com/80836180/150545854-0b8c9543-f59c-4966-aea1-5b7f63ec9aea.png)
 
 
-**Upcoming documentation:**
+### In the List App in the Store
 
- - [Feature/giftcard](https://github.com/vtex-apps/gift-card-list/pull/1)
- - [add infos list-graphql](https://github.com/vtex-apps/gift-card-list/pull/2)
- - [Feature/masterdata](https://github.com/vtex-apps/gift-card-list/pull/3)
- - [Feature/new masterdata](https://github.com/vtex-apps/gift-card-list/pull/4)
- - [rota para resgatar o RedemptionCode](https://github.com/vtex-apps/gift-card-list/pull/6)
- - [Feature/admin](https://github.com/vtex-apps/gift-card-list/pull/8)
- - [Feature/test admin](https://github.com/vtex-apps/gift-card-list/pull/9)
- - [Feature/value gift card](https://github.com/vtex-apps/gift-card-list/pull/10)
+When you enter my lists you can find a field to add credit to the giftcard.
+
+<!---
+ADICIONAR UMA FOTO DA PAGINA DA LISTA COM O BOTÃO DO GIFT CARD
+-->
+📢 This feature will be implemented in the future
+
+![](https://dummyimage.com/600x400/000/fff)
+
+
+If there is credit available to be added to the gift card, the owner of the list will be able to choose how much credit he wants to make available on the gift card. And when adding this value, a gift card code is returned to the user. As soon as there is credit on the gift card, the owner of the list will be able to use it in the main store.
+To use the available credit, you can log in to the store and use the gift card that will appear in the payment field. Another way to use it is with the gift card code that was returned on the list page (see photo above)

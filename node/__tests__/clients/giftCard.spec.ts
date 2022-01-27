@@ -12,7 +12,7 @@ describe('Gift Card Client', () => {
 
   const GiftCardClient = new GiftCard(MOCKED_CONTEXT, MOCKED_OPTIONS)
 
-  it('Test if createGiftCard it works and have a return', async () => {
+  it('should test if function createGiftCard works right and have valid a return', async () => {
     // @ts-ignore
     const post = jest.spyOn(GiftCardClient.http, 'post').mockResolvedValue({
       id: 'id',
@@ -39,7 +39,7 @@ describe('Gift Card Client', () => {
     )
   })
 
-  it('Test if addCreditInGiftCard it works and have a true return', async () => {
+  it('should test if function addCreditInGiftCard works right and have a valid return', async () => {
     // @ts-ignore
     const post = jest.spyOn(GiftCardClient.http, 'post').mockResolvedValue({
       id: 'id',
@@ -54,7 +54,7 @@ describe('Gift Card Client', () => {
     expect(returnValue).toStrictEqual(true)
   })
 
-  it('Test if addCreditInGiftCard it works and have a false return', async () => {
+  it('should test if function addCreditInGiftCard works right and have a invalid return', async () => {
     // @ts-ignore
     const post = jest.spyOn(GiftCardClient.http, 'post').mockResolvedValue({
       id: null,

@@ -12,7 +12,7 @@ describe('List Graphql Client', () => {
 
   const ProfileSystemClient = new ProfileSystem(MOCKED_CONTEXT, MOCKED_OPTIONS)
 
-  it('Test if getRegisterOnProfileSystem it works and have a return without call function createRegisterOnProfileSystem', async () => {
+  it('should test if function getRegisterOnProfileSystem works right and have a return without call function createRegisterOnProfileSystem', async () => {
     // @ts-ignore
     const get = jest.spyOn(ProfileSystemClient.http, 'get').mockResolvedValue({
       firstName: 'name',
@@ -31,7 +31,7 @@ describe('List Graphql Client', () => {
     )
   })
 
-  it('Test if getRegisterOnProfileSystem it works and have a return with call function createRegisterOnProfileSystem', async () => {
+  it('should test if function getRegisterOnProfileSystem works right and have a return with call function createRegisterOnProfileSystem', async () => {
     // @ts-ignore
     const get = jest.spyOn(ProfileSystemClient.http, 'get').mockResolvedValue({
       firstName: null,
@@ -62,7 +62,7 @@ describe('List Graphql Client', () => {
     )
   })
 
-  it('Test if joinProfileSystem it works', async () => {
+  it('should test if function joinProfileSystem works', async () => {
     const put = jest
       // @ts-ignore
       .spyOn(ProfileSystemClient.http, 'put')
@@ -75,7 +75,7 @@ describe('List Graphql Client', () => {
     )
   })
 
-  it('Test if disjoinProfileSystem it works', async () => {
+  it('should test if function disjoinProfileSystem works', async () => {
     const deleteFunction = jest
       // @ts-ignore
       .spyOn(ProfileSystemClient.http, 'delete')

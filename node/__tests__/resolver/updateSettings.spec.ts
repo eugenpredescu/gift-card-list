@@ -2,7 +2,7 @@
 import { updateSettings } from '../../resolvers/updateSettings'
 
 describe('Test updateSettings', () => {
-  it('test if updateSettings return the same value of getAppSettings', async () => {
+  it('should test if function updateSettings return the same value of getAppSettings', async () => {
     // @ts-ignore
     const ctx = {
       vtex: {
@@ -33,7 +33,7 @@ describe('Test updateSettings', () => {
     expect(returnValue).toStrictEqual({ settingsAccount: 'account1' })
   })
 
-  it('test if updateSettings return the same value of saveAppSettings', async () => {
+  it('should test if the function updateSettings return the same value of saveAppSettings', async () => {
     // @ts-ignore
     const ctx = {
       vtex: {

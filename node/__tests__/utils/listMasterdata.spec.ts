@@ -37,25 +37,25 @@ describe('Test listMasterdata', () => {
     },
   } as unknown as Context
 
-  it('Test function getInfoMasterdata have a return', async () => {
+  it('should test if function getInfoMasterdata have a return', async () => {
     const returnValue = await getInfoMasterdata(ctx, 'email@email.com.br')
 
     expect(returnValue).toStrictEqual(searchValues)
   })
 
-  it('Test function saveInfoMasterdata have a return', async () => {
+  it('should test if function saveInfoMasterdata have a return', async () => {
     const returnValue = await saveInfoMasterdata(ctx, saveValues)
 
     expect(returnValue).toStrictEqual(save)
   })
 
-  it('Test function saveInfoMasterdata have a error', async () => {
+  it('should test if function saveInfoMasterdata have a error', async () => {
     const returnValue = await saveInfoMasterdata(ctxError, saveValues)
 
     expect(returnValue).toBe(false)
   })
 
-  it('Test function updateInfoMasterdata have a return', async () => {
+  it('should test if function updateInfoMasterdata have a return', async () => {
     const returnValue = await updateInfoMasterdata(
       ctx,
       'id',
@@ -72,7 +72,7 @@ describe('Test listMasterdata', () => {
     expect(returnValue).toStrictEqual(true)
   })
 
-  it('Test function updateInfoMasterdata have a error', async () => {
+  it('should test if function updateInfoMasterdata have a error', async () => {
     const returnValue = await updateInfoMasterdata(
       ctxError,
       'id',

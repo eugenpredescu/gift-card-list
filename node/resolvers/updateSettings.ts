@@ -1,15 +1,11 @@
-import { Apps } from '@vtex/api'
-
 export const updateSettings = async (
   _: any,
   settingsAccount: { settingsAccount: string },
   ctx: Context
 ) => {
   const {
-    clients: { profileSystem },
+    clients: { profileSystem, apps },
   } = ctx
-
-  const apps = new Apps(ctx.vtex)
 
   const accountBefore = await apps.getAppSettings(ctx.vtex.userAgent)
 

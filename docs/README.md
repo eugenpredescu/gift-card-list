@@ -36,7 +36,6 @@ Clicking on the application, you should see the following page:
 
 On this page it is possible to choose which will be the main account
 
-
 An example of how the account can be chosen.
 
 To choose the account, click on the 'Main account name' field and choose one of the options shown

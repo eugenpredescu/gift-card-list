@@ -215,6 +215,7 @@ export const ctxMasterdataValueTrue = {
   clients: {
     giftCard: {
       addCreditInGiftCard: jest.fn().mockResolvedValue(true),
+      getValueGiftCard: jest.fn().mockResolvedValue(3),
     },
     listGraphql: {
       checkDataValueList: jest
@@ -305,6 +306,31 @@ export const ctxRouteSuccess = {
 } as unknown as Context
 
 export const ctxRouteError = {
+  clients: {
+    giftCardList: {
+      searchRaw: jest.fn().mockResolvedValue(searchUndefined),
+    },
+    vtexid: {
+      getAuthenticatedUser: jest.fn().mockResolvedValue({
+        sub: 'test@test.com',
+        account: 'test',
+        audience: 'admin',
+        sess: 'sess',
+        exp: 'exp',
+        userId: 'userId',
+        iat: 1,
+        iss: 'iss',
+        jti: 'jti',
+      }),
+    },
+  },
+  vtex: {
+    storeUserAuthToken:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjEyMzQifQ.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiYWNjb3VudCI6InRlc3QiLCJhdWRpZW5jZSI6ImFkbWluIiwic2VzcyI6InNlc3MiLCJleHAiOiJleHAiLCJ1c2VySWQiOiJ1c2VySWQiLCJpYXQiOjEsImlzcyI6ImlzcyIsImp0aSI6Imp0aSJ9.nnqmVfGsobK5hfdtAu10a0NU36-kFQ0f2LmN4R9rs8Q',
+  },
+} as unknown as Context
+
+export const ctxMasterdataWithoutValues = {
   clients: {
     giftCardList: {
       searchRaw: jest.fn().mockResolvedValue(searchUndefined),

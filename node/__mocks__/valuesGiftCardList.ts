@@ -8,7 +8,7 @@ export const searchValues = {
       redemptionCode: 'redemptionCode',
       giftCardId: 'giftCardId',
       id: 'id',
-      quantityAlreadyInGiftCard: 0,
+      quantityAlreadyInGiftCard: 3,
       history: [
         {
           dateAndTime: '2022-01-07T19:37:16.2853567Z',

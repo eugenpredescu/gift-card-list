@@ -13,6 +13,7 @@ type Query {
   getAccounts: [String]
   getRouteHistory: [History]
   getRouteRedemptionCode: String
+  getValueGiftCard: Float
   getValueAlreadyInGiftCard: Float
 }
 type Mutation {

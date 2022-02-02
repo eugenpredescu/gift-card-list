@@ -1,36 +1,13 @@
-import { HTTP_ERROR_MESSAGES } from '../utils/constants'
-import { getAdminEmail } from '../utils/getAdminEmail'
-import { validateEmail } from '../utils/validateEmail'
+import { verifyEmail } from '../utils/verifyEmail'
 
 export async function getValueTotalList(_: unknown, __: unknown, ctx: Context) {
   const {
-    clients: { listGraphql, vtexid },
-    vtex: { storeUserAuthToken },
+    clients: { listGraphql },
   } = ctx
 
-  if (!storeUserAuthToken) {
-    return HTTP_ERROR_MESSAGES.missingPermitions
-  }
+  const verify = await verifyEmail(ctx)
 
-  let authenticatedUser
+  if (verify.email === '') return verify.error
 
-  if (storeUserAuthToken) {
-    authenticatedUser = await vtexid.getAuthenticatedUser(storeUserAuthToken)
-  }
-
-  if (!authenticatedUser) {
-    return HTTP_ERROR_MESSAGES.missingPermitions
-  }
-
-  const email = getAdminEmail(storeUserAuthToken)
-
-  if (!email) {
-    return HTTP_ERROR_MESSAGES.missingEmail
-  }
-
-  if (!validateEmail(email)) {
-    return HTTP_ERROR_MESSAGES.invalidEmail
-  }
-
-  return (await listGraphql.checkDataValueList(email)).valuePurchased
+  return (await listGraphql.checkDataValueList(verify.email)).valuePurchased
 }

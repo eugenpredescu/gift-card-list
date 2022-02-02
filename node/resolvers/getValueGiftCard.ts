@@ -1,43 +1,20 @@
-import { HTTP_ERROR_MESSAGES } from '../utils/constants'
-import { getAdminEmail } from '../utils/getAdminEmail'
 import { getInfoMasterdata } from '../utils/listMasterdata'
-import { validateEmail } from '../utils/validateEmail'
+import { verifyEmail } from '../utils/verifyEmail'
 
 export async function getValueGiftCard(_: unknown, __: unknown, ctx: Context) {
   const {
-    clients: { vtexid, giftCard },
-    vtex: { storeUserAuthToken },
+    clients: { giftCard },
   } = ctx
 
-  if (!storeUserAuthToken) {
-    return HTTP_ERROR_MESSAGES.missingPermitions
+  const verify = await verifyEmail(ctx)
+
+  if (verify.email === '') return verify.error
+
+  const returnMasterdata = (await getInfoMasterdata(ctx, verify.email)).data[0]
+
+  if (returnMasterdata !== undefined) {
+    return giftCard.getValueGiftCard(returnMasterdata.giftCardId as string)
   }
 
-  let authenticatedUser
-
-  if (storeUserAuthToken) {
-    authenticatedUser = await vtexid.getAuthenticatedUser(storeUserAuthToken)
-  }
-
-  if (!authenticatedUser) {
-    return HTTP_ERROR_MESSAGES.missingPermitions
-  }
-
-  const email = getAdminEmail(storeUserAuthToken)
-
-  if (!email) {
-    return HTTP_ERROR_MESSAGES.missingEmail
-  }
-
-  if (!validateEmail(email)) {
-    return HTTP_ERROR_MESSAGES.invalidEmail
-  }
-
-  const returnMasterdata = await getInfoMasterdata(ctx, email)
-
-  const { giftCardId } = returnMasterdata.data[0]
-
-  const balance = await giftCard.getValueGiftCard(giftCardId as string)
-
-  return balance
+  return 0
 }

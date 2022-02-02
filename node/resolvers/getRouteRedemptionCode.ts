@@ -1,46 +1,20 @@
 import { HTTP_ERROR_MESSAGES } from '../utils/constants'
-import { getAdminEmail } from '../utils/getAdminEmail'
 import { getInfoMasterdata } from '../utils/listMasterdata'
-import { validateEmail } from '../utils/validateEmail'
+import { verifyEmail } from '../utils/verifyEmail'
 
 export async function getRouteRedemptionCode(
   _: unknown,
   __: unknown,
   ctx: Context
 ) {
-  const {
-    clients: { vtexid },
-    vtex: { storeUserAuthToken },
-  } = ctx
+  const verify = await verifyEmail(ctx)
 
-  if (!storeUserAuthToken) {
-    return HTTP_ERROR_MESSAGES.missingPermitions
-  }
+  if (verify.email === '') return verify.error
 
-  let authenticatedUser
+  const masterdataInfo = (await getInfoMasterdata(ctx, verify.email)).data[0]
 
-  if (storeUserAuthToken) {
-    authenticatedUser = await vtexid.getAuthenticatedUser(storeUserAuthToken)
-  }
-
-  if (!authenticatedUser) {
-    return HTTP_ERROR_MESSAGES.missingPermitions
-  }
-
-  const email = getAdminEmail(storeUserAuthToken)
-
-  if (!email) {
-    return HTTP_ERROR_MESSAGES.missingEmail
-  }
-
-  if (!validateEmail(email)) {
-    return HTTP_ERROR_MESSAGES.invalidEmail
-  }
-
-  const masterdataInfo = await getInfoMasterdata(ctx, email)
-
-  if (masterdataInfo.data[0] !== undefined) {
-    return masterdataInfo.data[0].redemptionCode
+  if (masterdataInfo !== undefined) {
+    return masterdataInfo.redemptionCode
   }
 
   return HTTP_ERROR_MESSAGES.failed

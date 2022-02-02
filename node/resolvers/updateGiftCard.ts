@@ -1,11 +1,10 @@
 import { HTTP_ERROR_MESSAGES } from '../utils/constants'
-import { getAdminEmail } from '../utils/getAdminEmail'
 import {
   getInfoMasterdata,
   saveInfoMasterdata,
   updateInfoMasterdata,
 } from '../utils/listMasterdata'
-import { validateEmail } from '../utils/validateEmail'
+import { verifyEmail } from '../utils/verifyEmail'
 
 export async function updateGiftCard(
   _: unknown,
@@ -14,33 +13,8 @@ export async function updateGiftCard(
 ) {
   const { value } = valueAddGiftCrad
   const {
-    clients: { profileSystem, giftCard, listGraphql, vtexid },
-    vtex: { storeUserAuthToken },
+    clients: { profileSystem, giftCard, listGraphql },
   } = ctx
-
-  if (!storeUserAuthToken) {
-    return HTTP_ERROR_MESSAGES.missingPermitions
-  }
-
-  let authenticatedUser
-
-  if (storeUserAuthToken) {
-    authenticatedUser = await vtexid.getAuthenticatedUser(storeUserAuthToken)
-  }
-
-  if (!authenticatedUser) {
-    return HTTP_ERROR_MESSAGES.missingPermitions
-  }
-
-  const email = getAdminEmail(storeUserAuthToken)
-
-  if (!email) {
-    return HTTP_ERROR_MESSAGES.missingEmail
-  }
-
-  if (!validateEmail(email)) {
-    return HTTP_ERROR_MESSAGES.invalidEmail
-  }
 
   if (!value) {
     return HTTP_ERROR_MESSAGES.missingValue
@@ -50,10 +24,16 @@ export async function updateGiftCard(
     return HTTP_ERROR_MESSAGES.negativeValue
   }
 
+  const verify = await verifyEmail(ctx)
+
+  if (verify.email === '') return verify.error
+
+  const { email } = verify
+
   const listGraphqlValue: {
     name: string
     valuePurchased: number
-  } = await listGraphql.checkDataValueList(email)
+  } = await listGraphql.checkDataValueList(verify.email)
 
   if (value > listGraphqlValue.valuePurchased) {
     return (
@@ -62,11 +42,11 @@ export async function updateGiftCard(
     )
   }
 
-  const masterdataInfo = await getInfoMasterdata(ctx, email)
+  const masterdataInfo = (await getInfoMasterdata(ctx, email)).data[0]
 
   let result = false
 
-  if (masterdataInfo.data[0] === undefined) {
+  if (masterdataInfo === undefined) {
     const register = await profileSystem.getRegisterOnProfileSystem(
       email,
       listGraphqlValue.name
@@ -100,29 +80,28 @@ export async function updateGiftCard(
     await saveInfoMasterdata(ctx, saveValues)
 
     if (result) {
-      return HTTP_ERROR_MESSAGES.sucess
+      return HTTP_ERROR_MESSAGES.success
     }
 
     return HTTP_ERROR_MESSAGES.failed
   }
 
   result = await giftCard.addCreditInGiftCard(
-    masterdataInfo.data[0].redemptionCode as string,
-    masterdataInfo.data[0].giftCardId as string,
+    masterdataInfo.redemptionCode as string,
+    masterdataInfo.giftCardId as string,
     value as number
   )
 
   await updateInfoMasterdata(
     ctx,
-    masterdataInfo.data[0].id as string,
-    (masterdataInfo.data[0].quantityAlreadyInGiftCard as number) +
-      (value as number),
-    masterdataInfo.data[0].history as HistoryInterface[],
+    masterdataInfo.id as string,
+    (masterdataInfo.quantityAlreadyInGiftCard as number) + (value as number),
+    masterdataInfo.history as HistoryInterface[],
     value as number
   )
 
   if (result) {
-    return HTTP_ERROR_MESSAGES.sucess
+    return HTTP_ERROR_MESSAGES.success
   }
 
   return HTTP_ERROR_MESSAGES.failed

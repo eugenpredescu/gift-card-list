@@ -9,7 +9,7 @@ import {
   ctxMasterdataUndefinedTrue,
   ctxMasterdataValueFalse,
   ctxMasterdataValueTrue,
-  ctxMissingPermitions,
+  ctxMissingPermissions,
   ctxMissingAuthentication,
 } from '../../__mocks__/contexts'
 
@@ -18,10 +18,10 @@ describe('Test updateGiftCard', () => {
     const returnValue = await updateGiftCard(
       '',
       { value: 20 },
-      ctxMissingPermitions
+      ctxMissingPermissions
     )
 
-    expect(returnValue).toStrictEqual(HTTP_ERROR_MESSAGES.missingPermitions)
+    expect(returnValue).toStrictEqual(HTTP_ERROR_MESSAGES.missingPermissions)
   })
 
   it('should test if the return value is an error if storeUserAuthToken dont have a VTEX authentication', async () => {
@@ -31,7 +31,7 @@ describe('Test updateGiftCard', () => {
       ctxMissingAuthentication
     )
 
-    expect(returnValue).toStrictEqual(HTTP_ERROR_MESSAGES.missingPermitions)
+    expect(returnValue).toStrictEqual(HTTP_ERROR_MESSAGES.missingPermissions)
   })
 
   it('should test if the return value is an error if I dont send an email', async () => {
@@ -75,7 +75,7 @@ describe('Test updateGiftCard', () => {
       ctxMasterdataUndefinedTrue
     )
 
-    expect(returnValue).toStrictEqual(HTTP_ERROR_MESSAGES.sucess)
+    expect(returnValue).toStrictEqual(HTTP_ERROR_MESSAGES.success)
   })
 
   it('should test if the return error when the function addCreditInGiftCard return false and dont have a giftcard before', async () => {
@@ -95,7 +95,7 @@ describe('Test updateGiftCard', () => {
       ctxMasterdataValueTrue
     )
 
-    expect(returnValue).toStrictEqual(HTTP_ERROR_MESSAGES.sucess)
+    expect(returnValue).toStrictEqual(HTTP_ERROR_MESSAGES.success)
   })
 
   it('should test if the return error when the function addCreditInGiftCard return false and have a giftcard before', async () => {

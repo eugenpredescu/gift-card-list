@@ -34,7 +34,7 @@ export const ctx = {
   },
 } as unknown as Context
 
-export const ctxMissingPermitions = {
+export const ctxMissingPermissions = {
   clients: {
     giftCard: {},
     profileSystem: {},

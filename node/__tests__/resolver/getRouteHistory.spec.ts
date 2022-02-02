@@ -5,17 +5,17 @@ import {
   ctxInvalidEmail,
   ctxMissingAuthentication,
   ctxMissingEmail,
-  ctxMissingPermitions,
+  ctxMissingPermissions,
   ctxRouteError,
   ctxRouteSuccess,
 } from '../../__mocks__/contexts'
 
 describe('Test getRouteHistory', () => {
   it('should test if the return value is an error if I dont send an storeUserAuthToken', async () => {
-    const returnValue = await getRouteHistory('', '', ctxMissingPermitions)
+    const returnValue = await getRouteHistory('', '', ctxMissingPermissions)
 
     expect(returnValue).toStrictEqual([
-      { errorMessage: HTTP_ERROR_MESSAGES.missingPermitions },
+      { errorMessage: HTTP_ERROR_MESSAGES.missingPermissions },
     ])
   })
 
@@ -23,7 +23,7 @@ describe('Test getRouteHistory', () => {
     const returnValue = await getRouteHistory('', '', ctxMissingAuthentication)
 
     expect(returnValue).toStrictEqual([
-      { errorMessage: HTTP_ERROR_MESSAGES.missingPermitions },
+      { errorMessage: HTTP_ERROR_MESSAGES.missingPermissions },
     ])
   })
 

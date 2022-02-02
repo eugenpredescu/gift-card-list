@@ -8,6 +8,6 @@ export const HTTP_ERROR_MESSAGES = {
   missingValue: 'missed value',
   valueBiggerThanCouldBe: 'the value needs to be less than ',
   negativeValue: 'the value needs to be greater than 0',
-  missingPermitions: 'missing permitions',
-  sucess: 'sucess',
+  missingPermissions: 'missing permissions',
+  success: 'success',
 }

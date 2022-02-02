@@ -5,7 +5,7 @@ import {
   ctxInvalidEmail,
   ctxMissingAuthentication,
   ctxMissingEmail,
-  ctxMissingPermitions,
+  ctxMissingPermissions,
   ctxRouteError,
   ctxRouteSuccess,
 } from '../../__mocks__/contexts'
@@ -15,10 +15,10 @@ describe('Test getRouteRedemptionCode', () => {
     const returnValue = await getRouteRedemptionCode(
       '',
       '',
-      ctxMissingPermitions
+      ctxMissingPermissions
     )
 
-    expect(returnValue).toStrictEqual(HTTP_ERROR_MESSAGES.missingPermitions)
+    expect(returnValue).toStrictEqual(HTTP_ERROR_MESSAGES.missingPermissions)
   })
 
   it('should test if the return value is an error if storeUserAuthToken dont have a VTEX authentication', async () => {
@@ -28,7 +28,7 @@ describe('Test getRouteRedemptionCode', () => {
       ctxMissingAuthentication
     )
 
-    expect(returnValue).toStrictEqual(HTTP_ERROR_MESSAGES.missingPermitions)
+    expect(returnValue).toStrictEqual(HTTP_ERROR_MESSAGES.missingPermissions)
   })
 
   it('should test if the return value is an error if I dont send an email', async () => {

@@ -49,4 +49,14 @@ export class GiftCard extends JanusClient {
 
     return false
   }
+
+  public async getValueGiftCard(id: string) {
+    const value = await this.http.get(
+      `https://${this.context.account}.vtexcommercestable.com.br/api/giftcards/${id}`
+    )
+
+    if (value) return value.balance
+
+    return 0
+  }
 }

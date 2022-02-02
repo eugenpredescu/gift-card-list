@@ -17,7 +17,8 @@ type Query {
   getValueGiftCard: Float
   getValueAlreadyInGiftCard: Float
 }
+
 type Mutation {
   updateSettings(settingsAccount: String): ReturnUpdate
-  updateGiftCard(value: Int): String
+  updateGiftCard(value: Float): String
 }

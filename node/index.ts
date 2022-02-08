@@ -1,11 +1,11 @@
 import type { ClientsConfig, ServiceContext } from '@vtex/api'
-import { method, Service } from '@vtex/api'
+import { Service } from '@vtex/api'
 
 import { Clients } from './clients'
-import { createGiftCard } from './middlewares/createGiftCard'
-import { routeHistory } from './middlewares/routeHistory'
-import { routeRedemptionCode } from './middlewares/routeRedemptionCode'
+import { getRouteHistory } from './resolvers/getRouteHistory'
+import { getRouteRedemptionCode } from './resolvers/getRouteRedemptionCode'
 import { updateSettings } from './resolvers/updateSettings'
+import { updateGiftCard } from './resolvers/updateGiftCard'
 import { getSettings } from './resolvers/getSettings'
 import { getAccounts } from './resolvers/getAccounts'
 
@@ -28,25 +28,17 @@ declare global {
 // Export a service that defines route handlers and client options.
 export default new Service({
   clients,
-  routes: {
-    createGiftCard: method({
-      POST: [createGiftCard],
-    }),
-    routeHistory: method({
-      GET: [routeHistory],
-    }),
-    routeRedemptionCode: method({
-      GET: [routeRedemptionCode],
-    }),
-  },
   graphql: {
     resolvers: {
       Query: {
         getSettings,
         getAccounts,
+        getRouteHistory,
+        getRouteRedemptionCode,
       },
       Mutation: {
         updateSettings,
+        updateGiftCard,
       },
     },
   },

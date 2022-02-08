@@ -2,10 +2,19 @@ type ReturnUpdate {
   settingsAccount: String
 }
 
+type History {
+  dateAndTime: String
+  value: Int
+  errorMessage: String
+}
+
 type Query {
   getSettings: ReturnUpdate
   getAccounts: [String]
+  getRouteHistory: [History]
+  getRouteRedemptionCode: String
 }
 type Mutation {
   updateSettings(settingsAccount: String): ReturnUpdate
+  updateGiftCard(value: Int): String
 }

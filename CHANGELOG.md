@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.13.0] - 2022-02-08
+
 ## [0.12.0] - 2022-01-27
 ### Changed
 - Changing the middlewares codes to resolvers code

@@ -8,10 +8,10 @@ import { verifyEmail } from '../utils/verifyEmail'
 
 export async function updateGiftCard(
   _: unknown,
-  valueAddGiftCrad: { value: number },
+  valueAddGiftCard: { value: number },
   ctx: Context
 ) {
-  const { value } = valueAddGiftCrad
+  const { value } = valueAddGiftCard
   const {
     clients: { profileSystem, giftCard, listGraphql },
   } = ctx

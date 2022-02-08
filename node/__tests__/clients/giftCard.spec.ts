@@ -68,4 +68,32 @@ describe('Gift Card Client', () => {
 
     expect(returnValue).toStrictEqual(false)
   })
+
+  it('should test if function getValueGiftCard works right and have valid a return', async () => {
+    // @ts-ignore
+    const get = jest.spyOn(GiftCardClient.http, 'get').mockResolvedValue({
+      balance: 5,
+    })
+
+    const returnValue = await GiftCardClient.getValueGiftCard('id')
+
+    expect(get).toHaveBeenCalledWith(
+      `https://${MOCKED_CONTEXT.account}.vtexcommercestable.com.br/api/giftcards/id`
+    )
+
+    expect(returnValue).toStrictEqual(5)
+  })
+
+  it('should test if function getValueGiftCard works right and have invalid a return', async () => {
+    // @ts-ignore
+    const get = jest.spyOn(GiftCardClient.http, 'get').mockResolvedValue(null)
+
+    const returnValue = await GiftCardClient.getValueGiftCard('id')
+
+    expect(get).toHaveBeenCalledWith(
+      `https://${MOCKED_CONTEXT.account}.vtexcommercestable.com.br/api/giftcards/id`
+    )
+
+    expect(returnValue).toStrictEqual(0)
+  })
 })

@@ -8,6 +8,9 @@ import { updateSettings } from './resolvers/updateSettings'
 import { updateGiftCard } from './resolvers/updateGiftCard'
 import { getSettings } from './resolvers/getSettings'
 import { getAccounts } from './resolvers/getAccounts'
+import { getValueTotalList } from './resolvers/getValueTotalList'
+import { getValueGiftCard } from './resolvers/getValueGiftCard'
+import { getValueAlreadyInGiftCard } from './resolvers/getValueAlreadyInGiftCard'
 
 const TIMEOUT_MS = 800
 
@@ -35,6 +38,9 @@ export default new Service({
         getAccounts,
         getRouteHistory,
         getRouteRedemptionCode,
+        getValueTotalList,
+        getValueGiftCard,
+        getValueAlreadyInGiftCard,
       },
       Mutation: {
         updateSettings,

@@ -14,7 +14,9 @@ export class ListGraphql extends ExternalClient {
   }
 
   public async checkDataValueList(email: string) {
-    const value = await this.http.get(`/_v/getDataList/${email}`)
+    const value = await this.http.get<{ name: string; valuePurchased: number }>(
+      `/_v/getDataList/${email}`
+    )
 
     return value
   }

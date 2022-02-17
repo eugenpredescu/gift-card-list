@@ -4,9 +4,22 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.15.0] - 2022-02-17
+### Changed
+- Correcting form of permition to add credit in gift card
+- Correct tests
+
 ## [0.14.0] - 2022-02-08
+### Changed
+- Change form of consulting ACCT API
 
 ## [0.13.0] - 2022-02-08
+### Changed
+-  Creating new functions to
+  - Get the total value of gift card
+  - Get the total value of credit in lists
+  - Get the value that has already been added to the gift card from the total value of the lists
+
 
 ## [0.12.0] - 2022-01-27
 ### Changed

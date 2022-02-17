@@ -42,7 +42,8 @@ export async function updateGiftCard(
     )
   }
 
-  const masterdataInfo = (await getInfoMasterdata(ctx, email)).data[0]
+  const masterdataInfo = (await getInfoMasterdata(ctx, email))
+    .data[0] as unknown as MasterdataValues
 
   let result = false
 
@@ -84,6 +85,13 @@ export async function updateGiftCard(
     }
 
     return HTTP_ERROR_MESSAGES.failed
+  }
+
+  const credit =
+    listGraphqlValue.valuePurchased - masterdataInfo.quantityAlreadyInGiftCard
+
+  if (value > credit) {
+    return HTTP_ERROR_MESSAGES.valueBiggerThanCouldBe + credit.toString()
   }
 
   result = await giftCard.addCreditInGiftCard(

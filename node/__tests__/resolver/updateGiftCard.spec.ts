@@ -11,6 +11,7 @@ import {
   ctxMasterdataValueTrue,
   ctxMissingPermissions,
   ctxMissingAuthentication,
+  ctxCredit,
 } from '../../__mocks__/contexts'
 
 describe('Test updateGiftCard', () => {
@@ -62,6 +63,14 @@ describe('Test updateGiftCard', () => {
 
   it('should test if the return value is an error if I send a value > listGraphqlValue.valuePurchased', async () => {
     const returnValue = await updateGiftCard('', { value: 3 }, ctx)
+
+    expect(returnValue).toStrictEqual(
+      `${HTTP_ERROR_MESSAGES.valueBiggerThanCouldBe}2`
+    )
+  })
+
+  it('should test if the return value is an error if I send a value < listGraphqlValue.valuePurchased, but value > credit', async () => {
+    const returnValue = await updateGiftCard('', { value: 3 }, ctxCredit)
 
     expect(returnValue).toStrictEqual(
       `${HTTP_ERROR_MESSAGES.valueBiggerThanCouldBe}2`

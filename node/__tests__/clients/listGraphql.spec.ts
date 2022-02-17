@@ -13,11 +13,10 @@ describe('List Graphql Client', () => {
   const ListGraphqlClient = new ListGraphql(MOCKED_CONTEXT, MOCKED_OPTIONS)
 
   it('should test if function checkDataValueList work right and have a valid return', async () => {
-    // @ts-ignore
-    const get = jest.spyOn(ListGraphqlClient.http, 'get').mockResolvedValue([
-      { ownerName: 'name', valuePurchased: 1 },
-      { ownerName: 'name', valuePurchased: 2 },
-    ])
+    const get = jest
+      // @ts-ignore
+      .spyOn(ListGraphqlClient.http, 'get')
+      .mockResolvedValue({ name: 'name', valuePurchased: 3 })
 
     const returnValue = await ListGraphqlClient.checkDataValueList(
       'email@email.com.br'
@@ -29,7 +28,7 @@ describe('List Graphql Client', () => {
     })
 
     return expect(get).toHaveBeenCalledWith(
-      `https://${MOCKED_CONTEXT.account}.vtexcommercestable.com.br/api/dataentities/vtex_list_graphql_userLists/search?_schema=1.6.0&_fields=_all&ownerEmail=email@email.com.br`
+      `/_v/getDataList/email@email.com.br`
     )
   })
 })
